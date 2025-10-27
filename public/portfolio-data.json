@@ -1,0 +1,100 @@
+{
+  "name": "Suraj Dhawal",
+  "titles": ["Aspiring Software Developer", "Frontend Web Developer", "AI Enthusiast", "Passionate Learner"],
+  "email": "surajdhawal115@gmail.com",
+  "skills": {
+    "languages": [
+      { "name": "C", "level": 80 },
+      { "name": "C++", "level": 75 },
+      { "name": "Java", "level": 70 },
+      { "name": "HTML/CSS", "level": 85 },
+      { "name": "JavaScript", "level": 78 }
+    ],
+    "tools": [
+      { "name": "Git & GitHub", "level": 75 },
+      { "name": "Linux", "level": 75 },
+      { "name": "Tailwind CSS", "level": 70 },
+      { "name": "GSAP", "level": 60 }
+    ],
+    "other": [
+      { "name": "Cybersecurity", "level": 65 },
+      { "name": "AI & ML", "level": 60 },
+      { "name": "Networking", "level": 70 }
+    ]
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "IELTS Class Website",
+      "icon": "fa-solid fa-book-open",
+      "tags": ["Web", "HTML"],
+      "desc": "A dedicated website for IELTS classes and resources.",
+      "thumb": "https://placehold.co/600x400/223344/e2e8f0?text=IELTS",
+      "link": "https://github.com/Dev-Suraj-Dhawal/IELTS_Class_Website",
+      "website": "https://dev-suraj-dhawal.github.io/IELTS_Class_Website/",
+      "tech": ["HTML", "CSS"]
+    },
+    {
+      "id": 2,
+      "title": "AI Mood Quote Generator",
+      "icon": "fa-solid fa-robot",
+      "tags": ["Web", "AI", "JavaScript"],
+      "desc": "An interactive, AI-powered motivational quote generator.",
+      "thumb": "https://placehold.co/600x400/445566/e2e8f0?text=AI+Quote+Generator",
+      "link": "https://github.com/Dev-Suraj-Dhawal/AI-Mood-Quote-Generator",
+      "website": "https://ai-mood-quote-generator.vercel.app/",
+      "tech": ["JavaScript", "HTML", "CSS", "AI"]
+    },
+    {
+      "id": 3,
+      "title": "Audio Visualizer",
+      "icon": "fa-solid fa-music",
+      "tags": ["Web", "JavaScript"],
+      "desc": "A glowing, animated real-time audio visualizer.",
+      "thumb": "https://placehold.co/600x400/556677/e2e8f0?text=Audio+Visualizer",
+      "link": "https://github.com/Dev-Suraj-Dhawal/audio-visualizer",
+      "website": "https://audio-visualizer-ruby.vercel.app/",
+      "tech": ["JavaScript", "HTML", "CSS"]
+    },
+    {
+      "id": 4,
+      "title": "EMI WEB APP",
+      "icon": "fa-solid fa-calculator",
+      "tags": ["Web", "Tool", "JavaScript"],
+      "desc": "A simple and clean EMI calculator web app.",
+      "thumb": "https://placehold.co/600x400/667788/e2e8f0?text=EMI+Web+App",
+      "link": "https://github.com/Dev-Suraj-Dhawal/EMI_WEB_APP",
+      "website": "https://emi-web-app-pied.vercel.app/",
+      "tech": ["JavaScript", "HTML", "CSS"]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Intern",
+      "company": "Nepal Telecom",
+      "from": "Jan 2024",
+      "to": "Apr 2024",
+      "location": "Lumbini, Nepal",
+      "bullets": ["Customer Relationship Management (CRM)", "Computer Networking", "On-site internship tasks and teamwork"]
+    }
+  ],
+  "education": [
+    {
+      "school": "Rupandehi Lilaram Neupane Secondary School",
+      "degree": "Diploma in Computer Engineering (DCOM)",
+      "from": "Feb 2020",
+      "to": "Jan 2024",
+      "grade": "73.48%"
+    },
+    {
+      "school": "Little Paradise English Medium School",
+      "degree": "SEE",
+      "grade": "A"
+    }
+  ],
+  "certs": [
+    { "title": "Google Cloud Skills Boost", "issuer": "Google", "date": "Jun 2024" },
+    { "title": "NET Aspire Introduction", "issuer": "STYAVA.DEV", "date": "Aug 2024" },
+    { "title": "Generative AI", "issuer": "Various", "date": "2024" }
+  ]
+}
