@@ -1,39 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Admin Panel - Contacts</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f8f9fa; }
-    h2 { margin-bottom: 20px; }
-    table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-    th { background: #06b6d4; color: white; }
-    tr:nth-child(even) { background: #f2f2f2; }
-  </style>
-</head>
-<body>
-  <h2>📋 Contact Form Submissions</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Message</th>
-        <th>Created At</th>
-      </tr>
-    </thead>
-    <tbody id="contactTable"></tbody>
-  </table> -->
-
-<!-- Load external JS -->
-<!-- <script src="/admin.js"></script>
-  <script src="/logic.js"></script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,8 +7,8 @@
   <title>Document</title>
 
   <!-- Tailwind -->
-  <link rel="stylesheet" href="input.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/input.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
@@ -66,13 +30,6 @@
 </head>
 
 <body>
-  <!-- 🔐 Logout Button -->
-  <!-- <div class="flex justify-end p-4">
-    <button id="logoutBtn"
-      class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-lg transition-all">
-      <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout
-    </button>
-  </div> -->
 
   <!-- Contacts Table -->
   <div class="glass1 p-4 sm:p-6 rounded-lg mt-6 overflow-x-auto" id="dashboard" onclick="window.openSidebar()">
@@ -154,47 +111,12 @@
 
 
   <!-- APP SCRIPT -->
-  <script src="./logic.js"></script>
+  <!-- <script src="js/logic.js"></script> -->
   <script src="./routes/admin.js"></script>
-  <script src="./routes/auth.js"></script>
-  <script src="./login-modal.js"></script>
+  <!-- <script src="./routes/auth.js"></script> -->
+  <!-- <script src="js/login-modal.js"></script> -->
 
 
-  <!-- <script>
-    (async () => {
-      const token = localStorage.getItem('auth_token');
-      if (!token) {
-        alert('Access denied. Please log in first.');
-        window.location.href = '/';
-        return;
-      }
-
-      const res = await fetch('/auth/verify', {
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      const data = await res.json();
-
-      if (!data.valid) {
-        alert('Session expired or invalid. Please log in again.');
-        localStorage.removeItem('auth_token');
-        window.location.href = '/';
-      }
-    })();
-  </script> -->
-
-  <!--<script>
-    // public/js/checkAuth.js
-    (async () => {
-      try {
-        const res = await fetch('/auth/verify', { credentials: 'same-origin' });
-        const data = await res.json();
-        if (res.ok && data.valid) {
-          document.getElementById('dashboardLink').classList.remove('hidden');
-        }
-      } catch (e) { /* not logged in */ }
-    })();
-
-  </script> -->
 </body>
 
 </html>
