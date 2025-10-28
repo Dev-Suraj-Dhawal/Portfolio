@@ -13,9 +13,9 @@
         content="Suraj Dhawal — Diploma in Computer Engineering. Frontend Web Developer | Aspiring Software Developer | AI & Cybersecurity enthusiast." />
 
     <!-- Tailwind -->
-    <!-- <link rel="stylesheet" href="css/input.css"> -->
+    <link rel="stylesheet" href="css/input.css">
     <link rel="stylesheet" href="css/style.css">
-    
+
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts: Inter -->
@@ -29,7 +29,7 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
     <!-- 1️⃣ Socket.IO Client -->
     <script src="/socket.io/socket.io.js"></script>
 
@@ -200,9 +200,9 @@
                             class="w-full p-3 bg-transparent border border-white/10 rounded-md focus:outline-none focus:ring-1 focus:ring-cyan-400 text-sm sm:text-base resize-y"></textarea>
                         <div class="flex gap-3 items-center flex-wrap">
                             <button type="submit"
-                                class="px-4 py-2 rounded-md bg-gradient-to-r from-[#06b6d4] to-[#a78bfa] text-black font-semibold text-sm sm:text-base">Send</button>
+                                class="px-4 py-2 rounded-md bg-gradient-to-r from-[#06b6d4] to-[#a78bfa] text-black font-semibold text-sm sm:text-base cursor-pointer">Send</button>
                             <button type="button" id="copyEmail"
-                                class="px-4 py-2 rounded-md border border-white/10 hover:bg-white/5 transition-colors text-sm sm:text-base">Copy
+                                class="px-4 py-2 rounded-md border border-white/10 hover:bg-white/5 transition-colors text-sm sm:text-base cursor-pointer">Copy
                                 Email</button>
                         </div>
                         <p id="formMsg" class="text-sm text-slate-300 h-4"></p>
@@ -222,9 +222,159 @@
                 </div>
             </section>
         </main>
+<!-- Footer with animated nebula background -->
+<footer class="relative w-full bg-gradient-to-r from-[#0f1123] to-[#071026] text-slate-300 px-6 py-10 sm:py-12 flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-0 border-t border-white/10 overflow-hidden">
+  <!-- Nebula/Particle Canvas -->
+  <canvas id="footerCanvas" class="absolute inset-0 w-full h-full z-0 pointer-events-none"></canvas>
 
-        <footer class="py-4 sm:py-6 text-center text-xs sm:text-sm text-slate-500 px-4">© Suraj Dhawal • Built with
-            modern web tech</footer>
+  <!-- Left: Branding / Copyright -->
+  <div class="relative z-10 text-center sm:text-left text-sm sm:text-base">
+    <span class="font-semibold animate-bounce-slow">© 2025 Suraj Dhawal</span> • <span class="animate-fade-text">Built with modern web tech</span>
+  </div>
+
+  <!-- Right: Social / Interactive Links -->
+  <div class="relative z-10 flex flex-wrap justify-center sm:justify-end gap-5">
+    <!-- GitHub -->
+    <a href="https://github.com/Dev-Suraj-Dhawal" target="_blank" class="social-icon" title="GitHub" aria-label="GitHub">
+      <i class="fa-brands fa-github fa-lg"></i>
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="https://linkedin.com/in/suraj-dhawal" target="_blank" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
+      <i class="fa-brands fa-linkedin fa-lg"></i>
+    </a>
+
+    <!-- Email -->
+    <a href="mailto:suraj@example.com" class="social-icon" title="Email" aria-label="Email">
+      <i class="fa-solid fa-envelope fa-lg"></i>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@YourChannelName" target="_blank" class="social-icon" title="YouTube" aria-label="YouTube">
+      <i class="fa-brands fa-youtube fa-lg"></i>
+    </a>
+  </div>
+</footer>
+
+<!-- Footer Styles -->
+<style>
+/* Base icon style */
+.social-icon {
+  color: #9ca3af;
+  transition: all 0.4s ease;
+  transform: scale(1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 0 0 rgba(0,0,0,0);
+  cursor: pointer;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Hover / Focus glow & scale */
+.social-icon:hover,
+.social-icon:focus {
+  transform: scale(1.5);
+  text-shadow: 0 0 12px currentColor, 0 0 24px currentColor;
+  color: #ffffff;
+  outline: none;
+}
+
+/* Individual brand glow colors */
+.social-icon[href*="github"]:hover { color: #6e5494; text-shadow: 0 0 12px #6e5494, 0 0 24px #6e5494; }
+.social-icon[href*="linkedin"]:hover { color: #0a66c2; text-shadow: 0 0 12px #0a66c2, 0 0 24px #0a66c2; }
+.social-icon[href*="youtube"]:hover { color: #ff0000; text-shadow: 0 0 12px #ff0000, 0 0 24px #ff0000; }
+.social-icon[href*="mailto"]:hover { color: #22c55e; text-shadow: 0 0 12px #22c55e, 0 0 24px #22c55e; }
+
+/* Floating keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-5px) scale(1.05); }
+}
+
+/* Copyright bounce animation */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.animate-bounce-slow { display: inline-block; animation: bounce-slow 2s infinite ease-in-out; }
+
+/* Fade text animation for tech text */
+@keyframes fade-text {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.animate-fade-text { display: inline-block; animation: fade-text 3s infinite ease-in-out; }
+
+/* Touch-friendly scaling for mobile */
+@media (hover: none) {
+  .social-icon:active { transform: scale(1.3); text-shadow: 0 0 8px currentColor, 0 0 16px currentColor; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  footer { flex-direction: column; gap: 4; text-align: center; }
+  .social-icon { transform: scale(1.1); }
+}
+
+/* Canvas background layer */
+#footerCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+</style>
+
+<!-- Particle/Nebula JS -->
+<script>
+const canvas = document.getElementById('footerCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let w, h;
+
+function initCanvas() {
+  w = canvas.width = canvas.offsetWidth;
+  h = canvas.height = canvas.offsetHeight;
+  particles = [];
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.3,
+      dy: (Math.random() - 0.5) * 0.3,
+      alpha: Math.random() * 0.5 + 0.2,
+      color: `hsla(${Math.random()*360}, 70%, 60%, 0.6)`
+    });
+  }
+}
+
+function draw() {
+  ctx.clearRect(0,0,w,h);
+  for(let p of particles){
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = p.alpha;
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
+    if(p.x<0||p.x>w)p.dx*=-1;
+    if(p.y<0||p.y>h)p.dy*=-1;
+  }
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize', initCanvas);
+initCanvas();
+draw();
+</script>
+
+
+
+        <!-- <footer class="py-4 sm:py-6 text-center text-xs sm:text-sm text-slate-500 px-4">© Suraj Dhawal • Built with
+            modern web tech</footer> -->
 
         <!-- PROJECT DETAILS MODAL -->
         <div id="projModal" class="hidden fixed inset-0 bg-black/60 items-center justify-center z-60 p-4">
@@ -244,21 +394,26 @@
         <!-- LOGIN MODAL -->
         <div id="loginModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-70 p-4">
             <div class="bg-[#081226] rounded-xl p-6 max-w-md w-full glass">
-                <button id="closeLoginModal" class="float-right text-slate-400 hover:text-white mb-4">Close ✕</button>
+                <button id="closeLoginModal"
+                    class="float-right text-slate-400 hover:text-white mb-4 cursor-pointer">Close ✕</button>
                 <h3 class="text-xl font-bold mb-4 text-center">Admin👩‍💻</h3>
                 <form id="loginForm" class="space-y-4">
                     <input type="email" name="email" required placeholder="Email"
                         class="w-full p-3 bg-transparent border border-white/10 rounded-md focus:outline-none focus:ring-1 focus:ring-cyan-400 text-white" />
                     <input type="password" name="password" required placeholder="Password"
                         class="w-full p-3 bg-transparent border border-white/10 rounded-md focus:outline-none focus:ring-1 focus:ring-cyan-400 text-white" />
+
                     <button type="submit"
-                        class="w-full px-4 py-2 rounded-md bg-gradient-to-r from-[#06b6d4] to-[#a78bfa] text-black font-semibold hover:opacity-90">Login</button>
+                        class="w-full px-4 py-2 rounded-md bg-gradient-to-r from-[#06b6d4] to-[#a78bfa] text-black font-semibold hover:opacity-90 hover:scale-[1.03] active:scale-[0.97]hover:shadow-[0_0_15px_rgba(167,139,250,0.5)] transition-all duration-300 ease-in-out cursor-pointer">Login</button>
+
+                    <!-- <button type="submit" -->
+                    <!-- class="w-full px-4 py-2 rounded-md bg-gradient-to-r from-[#06b6d4] to-[#a78bfa] text-black font-semibold hover:opacity-90 cursor-pointer">Login</button> -->
                 </form>
                 <p id="loginError" class="text-red-400 text-sm mt-2 text-center"></p>
             </div>
         </div>
 
-  
+
 
     </div>
 
@@ -289,7 +444,7 @@
     <script src="js/logic.js"></script>
     <script src="js/login-modal.js"></script>
 
-    
+
 </body>
 
 </html>
