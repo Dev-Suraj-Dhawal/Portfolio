@@ -311,13 +311,13 @@
 const lazyBg = document.querySelectorAll(".lazy-bg");
 
 const observer = new IntersectionObserver((entries, obs) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.backgroundImage = `url(${entry.target.dataset.bg})`;
-      entry.target.classList.add("fade-in");
-      obs.unobserve(entry.target);
-    }
-  });
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.backgroundImage = `url(${entry.target.dataset.bg})`;
+            entry.target.classList.add("fade-in");
+            obs.unobserve(entry.target);
+        }
+    });
 });
 
 lazyBg.forEach(bg => observer.observe(bg));
@@ -398,24 +398,115 @@ async function loadData() {
 
 document.addEventListener('DOMContentLoaded', async function () {
     await loadData();
-
-
-    // --- RENDER FUNCTIONS ---
+    // new circular skill cirular one updated on 28/10/2025.
+    // --- CIRCULAR SKILL RENDER FUNCTION (Final Pro Version) ---
     const renderList = (arr, containerId) => {
         const container = document.getElementById(containerId);
         if (!container) return;
-        container.innerHTML = arr.map(it => `
-                    <div>
-                        <div class="flex justify-between text-sm">
-                            <div class="text-wrap">${it.name}</div>
-                            <div>${it.level}%</div>
-                        </div>
-                        <div class="skill-bar mt-2">
-                            <div class="skill-fill h-full rounded-full" data-level="${it.level}" style="width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));"></div>
-                        </div>
-                    </div>
-                `).join('');
+
+        container.innerHTML = `
+    <div class="flex flex-wrap justify-center gap-6">
+      ${arr
+                .map(
+                    (it) => `
+          <div class="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center 
+                      transition-all duration-300 transform hover:scale-110 group">
+              
+              <!-- Circular Progress -->
+              <svg class="absolute inset-0" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="none"></circle>
+                  <circle cx="50" cy="50" r="45"
+                      stroke="url(#grad-${it.name.replace(/\s+/g, '')})"
+                      stroke-width="8" fill="none"
+                      stroke-dasharray="283"
+                      stroke-dashoffset="283"
+                      stroke-linecap="round"
+                      class="skill-ring"
+                      data-level="${it.level}">
+                  </circle>
+                  <defs>
+                      <linearGradient id="grad-${it.name.replace(/\s+/g, '')}" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stop-color="#8b5cf6" />
+                          <stop offset="100%" stop-color="#c084fc" />
+                      </linearGradient>
+                  </defs>
+              </svg>
+
+              <!-- Center Logo & Text -->
+              <div class="z-10 flex flex-col items-center text-center group-hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.9)]">
+                  <img src="${it.icon}" 
+                      alt="${it.name}" 
+                      loading="lazy"
+                      class="w-8 h-8 sm:w-10 sm:h-10 object-contain transition-transform duration-300 group-hover:scale-110">
+                  <span class="text-xs sm:text-sm mt-1 text-gray-200 group-hover:text-violet-300">${it.name}</span>
+              </div>
+          </div>
+      `
+                )
+                .join("")}
+    </div>
+  `;
     };
+
+    // end of new circular skill section.
+
+    // --- CIRCULAR SKILL RENDER FUNCTION ---
+    // const renderList = (arr, containerId) => {
+    //     const container = document.getElementById(containerId);
+    //     if (!container) return;
+
+    //     container.innerHTML = `
+    //     <div class="flex flex-wrap justify-center gap-6">
+    //         ${arr.map(it => `
+    //             <div class="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
+    //                 <svg class="absolute inset-0" viewBox="0 0 100 100">
+    //                     <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="none"></circle>
+    //                     <circle cx="50" cy="50" r="45" 
+    //                         stroke="url(#grad-${it.name.replace(/\s+/g, '')})"
+    //                         stroke-width="8" fill="none"
+    //                         stroke-dasharray="283"
+    //                         stroke-dashoffset="283"
+    //                         stroke-linecap="round"
+    //                         class="skill-ring"
+    //                         data-level="${it.level}">
+    //                     </circle>
+    //                     <defs>
+    //                         <linearGradient id="grad-${it.name.replace(/\s+/g, '')}" x1="0" y1="0" x2="1" y2="1">
+    //                             <stop offset="0%" stop-color="var(--accent)" />
+    //                             <stop offset="100%" stop-color="var(--accent2)" />
+    //                         </linearGradient>
+    //                     </defs>
+    //                 </svg>
+    //                 <div class="z-10 flex flex-col items-center text-center">
+    //                     <img src="./assets/icons/${it.name.toLowerCase().replace(/[+]/g, 'p')}.png" 
+    //                          alt="${it.name}" 
+    //                          class="w-8 h-8 sm:w-10 sm:h-10 object-contain">
+    //                     <span class="text-xs sm:text-sm mt-1">${it.name}</span>
+    //                 </div>
+    //             </div>
+    //         `).join('')}
+    //     </div>
+    // `;
+    // };
+
+
+    // pervious horizantal skill section replacing with cirular one.
+    // // --- RENDER FUNCTIONS ---
+    // const renderList = (arr, containerId) => {
+    //     const container = document.getElementById(containerId);
+    //     if (!container) return;
+    //     container.innerHTML = arr.map(it => `
+    //                 <div>
+    //                     <div class="flex justify-between text-sm">
+    //                         <div class="text-wrap">${it.name}</div>
+    //                         <div>${it.level}%</div>
+    //                     </div>
+    //                     <div class="skill-bar mt-2">
+    //                         <div class="skill-fill h-full rounded-full" data-level="${it.level}" style="width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));"></div>
+    //                     </div>
+    //                 </div>
+    //             `).join('');
+    // };
 
     const renderProjects = (tag = 'all') => {
         const grid = document.getElementById('projectsGrid');
@@ -461,24 +552,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         </div>
     `).join('');
     };
-
-
-    // const renderProjects = (tag = 'all') => {
-    //     const grid = document.getElementById('projectsGrid');
-    //     if (!grid) return;
-    //     const filtered = (tag === 'all') ? DATA.projects : DATA.projects.filter(p => p.tags.includes(tag));
-    //     grid.innerHTML = filtered.map(p => `
-    //         <div class="glass p-4 rounded-lg hover:scale-105 transition-transform duration-300">
-    //             <img src="${p.thumb}" alt="${p.title}" class="w-full h-40 object-cover rounded-md"/>
-    //             <h4 class="mt-3 font-semibold text-wrap">${p.title}</h4>
-    //             <p class="text-sm text-slate-300 mt-2 h-10 text-wrap">${p.desc}</p>
-    //             <div class="mt-3 flex gap-2 flex-wrap">
-    //                 <button data-id="${p.id}" class="openProj px-3 py-1 rounded-md border border-white/10 text-sm hover:bg-white/5 transition-colors">Details</button>
-    //                 ${p.link ? `<a href="${p.link}" target="_blank" class="px-3 py-1 rounded-md border border-white/10 text-sm hover:bg-white/5 transition-colors">GitHub</a>` : ''}
-    //             </div>
-    //         </div>
-    //     `).join('');
-    // };
 
     const renderExperience = () => {
         const timelineEl = document.getElementById('timelineList');
@@ -624,23 +697,83 @@ document.addEventListener('DOMContentLoaded', async function () {
         };
         drawParticles();
 
-        // GSAP Animations
+        // // Animate circular skill rings
+        // document.querySelectorAll('.skill-ring').forEach(ring => {
+        //     ScrollTrigger.create({
+        //         trigger: ring,
+        //         start: 'top 85%',
+        //         onEnter: () => {
+        //             const level = ring.dataset.level;
+        //             const circumference = 283;
+        //             const offset = circumference - (circumference * level) / 100;
+        //             gsap.to(ring, { strokeDashoffset: offset, duration: 1.6, ease: 'power2.out' });
+        //         }
+        //     });
+        // });
+
+
         if (typeof gsap !== 'undefined') {
             gsap.registerPlugin(ScrollTrigger);
-            document.querySelectorAll('.skill-bar').forEach(bar => {
-                ScrollTrigger.create({
-                    trigger: bar,
-                    start: 'top 85%',
-                    onEnter: () => {
-                        const fill = bar.querySelector('.skill-fill');
-                        if (fill) {
-                            gsap.to(fill, { width: `${fill.dataset.level}%`, duration: 1.4, ease: 'power2.out' });
+
+            // Animate circular skill rings dynamically
+            const animateSkills = () => {
+                document.querySelectorAll('.skill-ring').forEach(ring => {
+                    const level = ring.dataset.level;
+                    const circumference = 283;
+                    const offset = circumference - (circumference * level) / 100;
+
+                    gsap.fromTo(
+                        ring,
+                        { strokeDashoffset: circumference },
+                        {
+                            strokeDashoffset: offset,
+                            duration: 1.5,
+                            ease: 'power2.out',
+                            scrollTrigger: {
+                                trigger: ring,
+                                start: 'top 85%',
+                                toggleActions: 'play none none reverse', // ensures scroll triggers animation
+                                // markers: true // optional: to debug
+                            }
                         }
-                    }
+                    );
                 });
+
+                // Refresh ScrollTrigger to detect new elements
+                ScrollTrigger.refresh();
+            };
+
+            // Call this after your renderList has completed
+            animateSkills();
+
+            // Smooth fade-in for sections
+            gsap.from('main section', {
+                opacity: 0,
+                y: 30,
+                stagger: 0.15,
+                duration: 0.9,
+                scrollTrigger: { trigger: 'main', start: 'top 80%' }
             });
-            gsap.from('main section', { opacity: 0, y: 30, stagger: 0.15, duration: 0.9, scrollTrigger: { trigger: 'main', start: 'top 80%' } });
         }
+
+
+        // GSAP Animations
+        // if (typeof gsap !== 'undefined') {
+        //     gsap.registerPlugin(ScrollTrigger);
+        //     document.querySelectorAll('.skill-bar').forEach(bar => {
+        //         ScrollTrigger.create({
+        //             trigger: bar,
+        //             start: 'top 85%',
+        //             onEnter: () => {
+        //                 const fill = bar.querySelector('.skill-fill');
+        //                 if (fill) {
+        //                     gsap.to(fill, { width: `${fill.dataset.level}%`, duration: 1.4, ease: 'power2.out' });
+        //                 }
+        //             }
+        //         });
+        //     });
+        //     gsap.from('main section', { opacity: 0, y: 30, stagger: 0.15, duration: 0.9, scrollTrigger: { trigger: 'main', start: 'top 80%' } });
+        // }
     };
 
     // --- EVENT LISTENERS ---
@@ -696,7 +829,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // FIXED: Contact Form submission to your local server
         // document.getElementById('contactForm').addEventListener('submit', async e => {
-            document.getElementById('contactForm').addEventListener('submit', async e => {
+        document.getElementById('contactForm').addEventListener('submit', async e => {
             e.preventDefault();
             const form = e.target;
             const formData = new FormData(form);
@@ -716,7 +849,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const result = await response.json();
                     msgEl.textContent = `Thanks, ${data.name}! Your message has been send✅.`;
                     form.reset();
-                    
+
                 } else {
                     const errorResult = await response.json();
                     throw new Error(errorResult.message || 'Server responded with an error❌.');

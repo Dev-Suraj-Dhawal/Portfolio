@@ -1,25 +1,88 @@
 {
   "name": "Suraj Dhawal",
-  "titles": ["Aspiring Software Developer", "Frontend Web Developer", "AI Enthusiast", "Passionate Learner"],
+  "titles": [
+    "Aspiring Software Developer",
+    "Frontend Web Developer",
+    "AI Enthusiast",
+    "Passionate Learner"
+  ],
   "email": "surajdhawal115@gmail.com",
   "skills": {
     "languages": [
-      { "name": "C", "level": 80 },
-      { "name": "C++", "level": 75 },
-      { "name": "Java", "level": 70 },
-      { "name": "HTML/CSS", "level": 85 },
-      { "name": "JavaScript", "level": 78 }
+      {
+        "name": "",
+        "level": 80,
+        "icon": "./assets/icons/c programming.png"
+      },
+      {
+        "name": "",
+        "level": 75,
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+      },
+      {
+        "name": "",
+        "level": 78,
+        "icon": "./assets/icons/python-svgrepo-com.svg"
+      },
+      {
+        "name": "",
+        "level": 70,
+        "icon": "./assets/icons/java.gif"
+      },
+      {
+        "name": "",
+        "level": 85,
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+      },
+      {
+        "name": "",
+        "level": 78,
+        "icon": "./assets/icons/javascript.png"
+      }
     ],
     "tools": [
-      { "name": "Git & GitHub", "level": 75 },
-      { "name": "Linux", "level": 75 },
-      { "name": "Tailwind CSS", "level": 70 },
-      { "name": "GSAP", "level": 60 }
+      {
+        "name": "",
+        "level": 75,
+        "icon": "https://img.icons8.com/?size=100&id=LoL4bFzqmAa0&format=png&color=000000"
+      },
+      {
+        "name": "",
+        "level": 75,
+        "icon": "./assets/icons/linux.png"
+      },
+      {
+        "name": "",
+        "level": 70,
+        "icon": "./assets/icons/tailwind.png"
+      },
+      {
+        "name": "GSAP",
+        "level": 60,
+        "icon": "./assets/icons/gsap.png"
+      },
+      {
+        "name": "MySQL",
+        "level": 75,
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+      }
     ],
     "other": [
-      { "name": "Cybersecurity", "level": 65 },
-      { "name": "AI & ML", "level": 60 },
-      { "name": "Networking", "level": 70 }
+      {
+        "name": "",
+        "level": 65,
+        "icon": "./assets/icons/cybersecurity.png"
+      },
+      {
+        "name": "",
+        "level": 60,
+        "icon": "https://cdn-icons-png.flaticon.com/512/2103/2103658.png"
+      },
+      {
+        "name": "",
+        "level": 70,
+        "icon": "https://cdn-icons-png.flaticon.com/512/2463/2463510.png"
+      }
     ]
   },
   "projects": [
@@ -27,45 +90,75 @@
       "id": 1,
       "title": "IELTS Class Website",
       "icon": "fa-solid fa-book-open",
-      "tags": ["Web", "HTML"],
+      "tags": [
+        "Web",
+        "HTML"
+      ],
       "desc": "A dedicated website for IELTS classes and resources.",
       "thumb": "https://placehold.co/600x400/223344/e2e8f0?text=IELTS",
       "link": "https://github.com/Dev-Suraj-Dhawal/IELTS_Class_Website",
       "website": "https://dev-suraj-dhawal.github.io/IELTS_Class_Website/",
-      "tech": ["HTML", "CSS"]
+      "tech": [
+        "HTML",
+        "CSS"
+      ]
     },
     {
       "id": 2,
       "title": "AI Mood Quote Generator",
       "icon": "fa-solid fa-robot",
-      "tags": ["Web", "AI", "JavaScript"],
+      "tags": [
+        "Web",
+        "AI",
+        "JavaScript"
+      ],
       "desc": "An interactive, AI-powered motivational quote generator.",
       "thumb": "https://placehold.co/600x400/445566/e2e8f0?text=AI+Quote+Generator",
       "link": "https://github.com/Dev-Suraj-Dhawal/AI-Mood-Quote-Generator",
       "website": "https://ai-mood-quote-generator.vercel.app/",
-      "tech": ["JavaScript", "HTML", "CSS", "AI"]
+      "tech": [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "AI"
+      ]
     },
     {
       "id": 3,
       "title": "Audio Visualizer",
       "icon": "fa-solid fa-music",
-      "tags": ["Web", "JavaScript"],
+      "tags": [
+        "Web",
+        "JavaScript"
+      ],
       "desc": "A glowing, animated real-time audio visualizer.",
       "thumb": "https://placehold.co/600x400/556677/e2e8f0?text=Audio+Visualizer",
       "link": "https://github.com/Dev-Suraj-Dhawal/audio-visualizer",
       "website": "https://audio-visualizer-ruby.vercel.app/",
-      "tech": ["JavaScript", "HTML", "CSS"]
+      "tech": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ]
     },
     {
       "id": 4,
       "title": "EMI WEB APP",
       "icon": "fa-solid fa-calculator",
-      "tags": ["Web", "Tool", "JavaScript"],
+      "tags": [
+        "Web",
+        "Tool",
+        "JavaScript"
+      ],
       "desc": "A simple and clean EMI calculator web app.",
       "thumb": "https://placehold.co/600x400/667788/e2e8f0?text=EMI+Web+App",
       "link": "https://github.com/Dev-Suraj-Dhawal/EMI_WEB_APP",
       "website": "https://emi-web-app-pied.vercel.app/",
-      "tech": ["JavaScript", "HTML", "CSS"]
+      "tech": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ]
     }
   ],
   "experience": [
@@ -75,7 +168,11 @@
       "from": "Jan 2024",
       "to": "Apr 2024",
       "location": "Lumbini, Nepal",
-      "bullets": ["Customer Relationship Management (CRM)", "Computer Networking", "On-site internship tasks and teamwork"]
+      "bullets": [
+        "Customer Relationship Management (CRM)",
+        "Computer Networking",
+        "On-site internship tasks and teamwork"
+      ]
     }
   ],
   "education": [
@@ -93,8 +190,20 @@
     }
   ],
   "certs": [
-    { "title": "Google Cloud Skills Boost", "issuer": "Google", "date": "Jun 2024" },
-    { "title": "NET Aspire Introduction", "issuer": "STYAVA.DEV", "date": "Aug 2024" },
-    { "title": "Generative AI", "issuer": "Various", "date": "2024" }
+    {
+      "title": "Google Cloud Skills Boost",
+      "issuer": "Google",
+      "date": "Jun 2024"
+    },
+    {
+      "title": "NET Aspire Introduction",
+      "issuer": "STYAVA.DEV",
+      "date": "Aug 2024"
+    },
+    {
+      "title": "Generative AI",
+      "issuer": "Various",
+      "date": "2024"
+    }
   ]
 }
