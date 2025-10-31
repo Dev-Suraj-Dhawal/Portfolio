@@ -1,11 +1,11 @@
-// document.addEventListener('DOMContentLoaded', function() {
-//     const DATA = {
-//         name: "Suraj Dhawal",
-//         titles: ["Aspiring Software Developer", "Frontend Web Developer", "AI Enthusiast", "Passionate Learner"],
-//         email: "surajdhawal115@gmail.com",
-//         skills: {
-//             languages: [{ name: 'C', level: 80 }, { name: 'C++', level: 75 }, { name: 'Java', level: 70 }, { name: 'HTML/CSS', level: 85 }, { name: 'JavaScript', level: 78 }],
-//             tools: [{ name: 'Git & GitHub', level: 75 }, { name: 'Linux', level: 75 }, { name: 'Tailwind CSS', level: 70 }, { name: 'GSAP', level: 60 }],
+// --- CIRCULAR SKILL RENDER FUNCTION (Final Pro Version) ---
+    // This function renders a list of skills as circular progress rings with icons and text.
+    // It takes an array of skill objects (arr) and a container ID (containerId) to populate the DOM.
+    // Each skill item includes a circular SVG for progress visualization, an icon, and the skill name.
+    // The layout is responsive: smaller circles on mobile (w-20 h-20), larger on small screens and up (sm:w-24 sm:h-24).
+    // Icons and text scale accordingly (w-8 h-8 sm:w-10 sm:h-10, text-xs sm:text-sm).
+    // Changes made: Removed hover prefixes to make scale and drop-shadow effects constant (always applied, not on hover).
+    // This ensures the skills always appear scaled and with a glow, improving visual prominence across all devices.
 //             other: [{ name: 'Cybersecurity', level: 65 }, { name: 'AI & ML', level: 60 }, { name: 'Networking', level: 70 }]
 //         },
 //         projects: [
@@ -400,23 +400,24 @@ document.addEventListener('DOMContentLoaded', async function () {
     await loadData();
     // new circular skill cirular one updated on 28/10/2025.
     // --- CIRCULAR SKILL RENDER FUNCTION (Final Pro Version) ---
-    const renderList = (arr, containerId) => {
-        const container = document.getElementById(containerId);
-        if (!container) return;
+   // --- CIRCULAR SKILL RENDER FUNCTION (Always Active + Floating Version) ---
+const renderList = (arr, containerId) => {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-        container.innerHTML = `
+  container.innerHTML = `
     <div class="flex flex-wrap justify-center gap-6">
       ${arr
-                .map(
-                    (it) => `
+        .map(
+          (it) => `
           <div class="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center 
-                      transition-all duration-300 transform hover:scale-110 group">
-              
+                      transition-all duration-300 transform scale-110 group">
+
               <!-- Circular Progress -->
               <svg class="absolute inset-0" viewBox="0 0 100 100">
                   <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="none"></circle>
                   <circle cx="50" cy="50" r="45"
-                      stroke="url(#grad-${it.name.replace(/\s+/g, '')})"
+                      stroke="url(#grad-${(it.name || 'skill').replace(/\s+/g, '')})"
                       stroke-width="8" fill="none"
                       stroke-dasharray="283"
                       stroke-dashoffset="283"
@@ -425,7 +426,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                       data-level="${it.level}">
                   </circle>
                   <defs>
-                      <linearGradient id="grad-${it.name.replace(/\s+/g, '')}" x1="0" y1="0" x2="1" y2="1">
+                      <linearGradient id="grad-${(it.name || 'skill').replace(/\s+/g, '')}" x1="0" y1="0" x2="1" y2="1">
                           <stop offset="0%" stop-color="#8b5cf6" />
                           <stop offset="100%" stop-color="#c084fc" />
                       </linearGradient>
@@ -433,20 +434,21 @@ document.addEventListener('DOMContentLoaded', async function () {
               </svg>
 
               <!-- Center Logo & Text -->
-              <div class="z-10 flex flex-col items-center text-center group-hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.9)]">
+              <div class="z-10 flex flex-col items-center text-center drop-shadow-[0_0_10px_rgba(168,85,247,0.9)]">
                   <img src="${it.icon}" 
                       alt="${it.name}" 
                       loading="lazy"
-                      class="w-8 h-8 sm:w-10 sm:h-10 object-contain transition-transform duration-300 group-hover:scale-110">
-                  <span class="text-xs sm:text-sm mt-1 text-gray-200 group-hover:text-violet-300">${it.name}</span>
+                      class="w-8 h-8 sm:w-10 sm:h-10 object-contain transform scale-110 animate-float">
+                  <span class="text-xs sm:text-sm mt-1 text-violet-300">${it.name}</span>
               </div>
           </div>
       `
-                )
-                .join("")}
+        )
+        .join("")}
     </div>
   `;
-    };
+};
+
 
     // end of new circular skill section.
 
@@ -778,11 +780,30 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // --- EVENT LISTENERS ---
     const initEventListeners = () => {
+        // Single-page navigation: Show only clicked section, hide others
+        const navLinks = document.querySelectorAll('a[href^="#"]');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    // Hide all sections
+                    document.querySelectorAll('main section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    // Show target section
+                    targetSection.classList.add('active');
+                    // Smooth scroll to section
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
         // Mobile Menu
         const mobileMenu = document.getElementById('mobileMenu');
         document.getElementById('mobileMenuBtn').addEventListener('click', () => mobileMenu.classList.remove('hidden'));
         document.getElementById('closeMobileMenuBtn').addEventListener('click', () => mobileMenu.classList.add('hidden'));
-        document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
         // Project Filtering
         document.getElementById('projectFilters').addEventListener('click', e => {

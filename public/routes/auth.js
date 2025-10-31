@@ -231,20 +231,97 @@
 
 
 
+// mysql authentication code proper working version code below
+
+// // public/routes/auth.js
+// const express = require('express');
+// const bcrypt = require('bcrypt');         // bcrypt for comparing
+// const jwt = require('jsonwebtoken');
+// const mysql = require('mysql2');
+// const dotenv = require('dotenv');
+// dotenv.config();
+
+// const router = express.Router();
+
+// // Create a new connection (or use a shared pool)
+// const pool = mysql.createPool({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASS || "",
+//   database: process.env.DB_NAME,
+//   waitForConnections: true,
+//   connectionLimit: 10,
+// }).promise();
+
+// // POST /auth/login
+// router.post('/login', async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     if (!email || !password) return res.status(400).json({ message: 'Email and password required' });
+
+//     const [rows] = await pool.query('SELECT * FROM admins WHERE email = ?', [email]);
+//     if (rows.length === 0) return res.status(401).json({ message: 'Invalid credentials' });
+
+//     const admin = rows[0];
+//     const match = await bcrypt.compare(password, admin.password_hash);
+//     if (!match) return res.status(401).json({ message: 'Invalid credentials' });
+
+//     const token = jwt.sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET, { expiresIn: '2h' });
+
+//     // Set HTTP-only cookie (not accessible from JS)
+//     res.cookie('auth_token', token, {
+//       httpOnly: true,
+//       sameSite: 'Strict',
+//       secure: false, // ✅ must be false for localhost (true only on HTTPS)
+//       maxAge: 2 * 60 * 60 * 1000 // 2 hours
+//     });
+
+//     return res.json({
+//       message: 'Login successful',
+//       token // ✅ include JWT in response too
+//     });
+
+//   } catch (err) {
+//     console.error('Auth login error:', err);
+//     return res.status(500).json({ message: 'Server error' });
+//   }
+// });
+
+// // POST /auth/logout
+// router.post('/logout', (req, res) => {
+//   res.clearCookie('auth_token');
+//   res.json({ message: 'Logged out' });
+// });
+
+// // GET /auth/verify (checks cookie)
+// router.get('/verify', (req, res) => {
+//   const token = req.cookies?.auth_token || (req.headers['authorization'] && req.headers['authorization'].split(' ')[1]);
+//   if (!token) return res.status(401).json({ valid: false });
+//   jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
+//     if (err) return res.status(403).json({ valid: false });
+//     res.json({ valid: true, user: payload });
+//   });
+// });
+
+// module.exports = router;
 
 
-
+// updated code for mongoDB admin insertion script below
 // public/routes/auth.js
 const express = require('express');
-const bcrypt = require('bcrypt');         // bcrypt for comparing
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql2');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
+// MongoDB Admin model
+const AdminMongo = require('../models/Admin');
+
 const router = express.Router();
 
-// Create a new connection (or use a shared pool)
+// MySQL pool
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -254,33 +331,61 @@ const pool = mysql.createPool({
   connectionLimit: 10,
 }).promise();
 
-// POST /auth/login
+/**
+ * ===========================
+ * POST /auth/login
+ * Hybrid Login (MySQL + MongoDB)
+ * ===========================
+ */
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) return res.status(400).json({ message: 'Email and password required' });
 
-    const [rows] = await pool.query('SELECT * FROM admins WHERE email = ?', [email]);
-    if (rows.length === 0) return res.status(401).json({ message: 'Invalid credentials' });
+    // 🔹 Validate input
+    if (!email || !password)
+      return res.status(400).json({ message: 'Email and password required' });
 
-    const admin = rows[0];
-    const match = await bcrypt.compare(password, admin.password_hash);
-    if (!match) return res.status(401).json({ message: 'Invalid credentials' });
+    // 🔹 Fetch admin records from both databases
+    const [mysqlRows] = await pool.query('SELECT * FROM admins WHERE email = ?', [email]);
+    const adminMySQL = mysqlRows.length > 0 ? mysqlRows[0] : null;
 
-    const token = jwt.sign({ id: admin.id, email: admin.email }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    const adminMongo = await AdminMongo.findOne({ email });
 
-    // Set HTTP-only cookie (not accessible from JS)
-    res.cookie('auth_token', token, {
-      httpOnly: true,
-      sameSite: 'Strict',
-      secure: false, // ✅ must be false for localhost (true only on HTTPS)
-      maxAge: 2 * 60 * 60 * 1000 // 2 hours
-    });
+    // 🔹 Collect all admins in a single array for easy checking
+    const admins = [];
+    if (adminMySQL) admins.push({ source: 'MySQL', data: adminMySQL });
+    if (adminMongo) admins.push({ source: 'MongoDB', data: adminMongo });
 
-    return res.json({
-      message: 'Login successful',
-      token // ✅ include JWT in response too
-    });
+    // 🔹 No admin found in either database
+    if (admins.length === 0)
+      return res.status(401).json({ message: 'Invalid credentials' });
+
+    // 🔹 Check password against each found admin
+    for (const admin of admins) {
+      const hashedPassword = admin.data.password_hash;
+      const match = await bcrypt.compare(password, hashedPassword);
+      if (match) {
+        // ✅ Password matches, generate JWT
+        const tokenPayload = admin.source === 'MySQL'
+          ? { id: admin.data.id, email: admin.data.email, db: 'MySQL' }
+          : { id: admin.data._id, email: admin.data.email, db: 'MongoDB' };
+
+        const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
+
+        // ✅ Set HTTP-only cookie
+        res.cookie('auth_token', token, {
+          httpOnly: true,
+          sameSite: 'Strict',
+          secure: false, // must be false for localhost
+          maxAge: 2 * 60 * 60 * 1000 // 2 hours
+        });
+
+        return res.json({ message: 'Login successful', token, db: admin.source });
+      }
+    }
+
+    // ❌ If password didn't match any admin
+    return res.status(401).json({ message: 'Invalid credentials' });
 
   } catch (err) {
     console.error('Auth login error:', err);
@@ -288,15 +393,21 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// POST /auth/logout
+/**
+ * POST /auth/logout
+ * Clear cookie
+ */
 router.post('/logout', (req, res) => {
   res.clearCookie('auth_token');
   res.json({ message: 'Logged out' });
 });
 
-// GET /auth/verify (checks cookie)
+/**
+ * GET /auth/verify
+ * Checks if JWT is valid
+ */
 router.get('/verify', (req, res) => {
-  const token = req.cookies?.auth_token || (req.headers['authorization'] && req.headers['authorization'].split(' ')[1]);
+  const token = req.cookies?.auth_token || (req.headers['authorization']?.split(' ')[1]);
   if (!token) return res.status(401).json({ valid: false });
   jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if (err) return res.status(403).json({ valid: false });
