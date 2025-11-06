@@ -21,18 +21,7 @@ $commitMessage = "🚀 Project Update ($time)`n"
 # Build descriptive commit messages
 foreach ($file in $changes) {
     switch -Regex ($file) {
-        "server\.js" { $commitMessage += "• Updated backend server logic and improved API security.`n" }
-        "package\.json" { $commitMessage += "• Updated dependencies and build scripts.`n" }
-        "ven\.html" { $commitMessage += "• Improved dashboard UI structure and responsiveness.`n" }
-        "input\.css" { $commitMessage += "• Refined Tailwind input styling for better visuals.`n" }
-        "style\.css" { $commitMessage += "• Minified and optimized Tailwind output CSS.`n" }
-        "dashboard\.css" { $commitMessage += "• Added premium dashboard styles and glass effects.`n" }
-        "dashboard\.min\.css" { $commitMessage += "• Minified dashboard stylesheet for production.`n" }
-        "logic\.js" { $commitMessage += "• Improved client-side logic and animations.`n" }
-        "login-modal\.js" { $commitMessage += "• Enhanced login modal transitions and validation.`n" }
-        "admin\.js" { $commitMessage += "• Updated admin route functionality and validation.`n" }
-        "auth\.js" { $commitMessage += "• Improved JWT authentication and session handling.`n" }
-        "data\.json" { $commitMessage += "• Updated app configuration or stored data.`n" }
+        "server\.js" { $commitMessage += "• Updated backend server logic and improved API security and reomved unnessary comments.`n" }
         default { $commitMessage += "• Modified file: $file.`n" }
     }
 }
