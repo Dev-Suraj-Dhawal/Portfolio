@@ -3,7 +3,9 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+test-db.js
+test.html
+test.txt
 # Environment variables
 .env
 .env.local

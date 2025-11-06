@@ -1,746 +1,17 @@
-// // ==================== server.js ====================
-
-// // Importing the 'express' framework which helps us create a server easily
-// const express = require('express');
-
-// // Importing the 'fs' (File System) module to read and write files (used for saving form data)
-// const fs = require('fs');
-
-// // Importing 'cors' (Cross-Origin Resource Sharing) so that requests from different domains (like frontend) are allowed
-// const cors = require('cors');
-
-// // Importing 'path' module to handle file paths (used when serving index.html)
-// const path = require('path');
-
-// // Create an instance of an Express application (this is our server)
-// const app = express();
-
-// // Define the port number where our server will run (http://localhost:3000)
-// const PORT = 3000;
-
-// // ------------------- Middleware -------------------
-
-// // Enable CORS so that our frontend (browser) can communicate with this backend server
-// app.use(cors());
-
-// // Enable Express to automatically parse incoming request bodies as JSON
-// // (so we can directly use req.body instead of manually parsing it)
-// app.use(express.json());
-
-// // Tell Express to serve static files (like index.html, CSS, JS) from the current folder (__dirname)
-// // This means if you put index.html, style.css, script.js here, they will be served automatically
-// app.use(express.static(__dirname));
-
-// // ------------------- Routes -------------------
-
-// // Handle GET requests to the root path "/"
-// // When a user opens http://localhost:3000/ in the browser, this will send back the index.html file
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'index.html')); // send the file index.html to the browser
-// });
-
-// // ------------------- API Endpoint -------------------
-
-// // Define a POST endpoint at '/save' where frontend form data will be sent
-// app.post('/save', (req, res) => {
-//     // Print the received request body in the terminal for debugging
-//     console.log('Received data:', req.body);
-
-//     // Store the request body (form submission) in a variable
-//     const newData = req.body;
-
-//     // Check if any required field is missing (name, email, or message)
-//     // If any field is missing, return an error response
-//     if (!newData.name || !newData.email || !newData.message) {
-//         return res.status(400).json({ message: 'Error: All fields are required.' });
-//     }
-
-//     // Path to the data.json file (this is where we will save the submissions)
-//     const filePath = './data.json';
-
-//     // Read the existing contents of data.json
-//     fs.readFile(filePath, 'utf8', (err, data) => {
-//         // If there's an error reading the file and it's not because the file doesn't exist
-//         if (err && err.code !== 'ENOENT') {
-//             console.error('Error reading file:', err);
-//             return res.status(500).json({ message: 'Error reading from database.' });
-//         }
-
-//         // If the file exists and has data, parse it into an array
-//         // If the file doesn't exist or is empty, start with an empty array []
-//         const database = (data ? JSON.parse(data) : []);
-
-//         // Add the new form submission into the array
-//         database.push(newData);
-
-//         // Write the updated array back into data.json (pretty-printed with 2 spaces)
-//         fs.writeFile(filePath, JSON.stringify(database, null, 2), (writeErr) => {
-//             // If there’s an error writing the file, return an error response
-//             if (writeErr) {
-//                 console.error('Error writing file:', writeErr);
-//                 return res.status(500).json({ message: 'Error saving to database.' });
-//             }
-
-//             // If successful, print a success message in the terminal
-//             console.log('Data successfully send to data.json🚀');
-
-//             // Send a success response back to the frontend
-//             res.status(200).json({ message: 'Data send successfully🚀!' });
-//         });
-//     });
-// });
-
-// // ------------------- Start Server -------------------
-
-// // Make the server listen on the defined port (3000)
-// // When the server starts successfully, print the URL in the terminal
-// app.listen(PORT, () => {
-//     console.log(`✅ Server 👩‍💻 running at http://localhost:${PORT}`);
-// });
-
-
-
-
-
-// // ==================== server.js ====================
-
-// const express = require("express");
-// const cors = require("cors");
-// const path = require("path");
-// const mysql = require("mysql2"); // ✅ using mysql2 now
-// const fs = require("fs");
-
-// const app = express();
-// const PORT = 3000;
-
-// // ------------------- Middleware -------------------
-// app.use(cors());
-// app.use(express.json());
-// app.use(express.static(__dirname));
-
-// // ------------------- MySQL Connection -------------------
-// const db = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",       // 🔹 your MySQL username
-//   password: "",       // 🔹 your MySQL password (if set)
-//   database: "portfolio_db"
-// });
-
-// db.connect((err) => {
-//   if (err) {
-//     console.error("❌ MySQL Connection Failed:", err);
-//     return;
-//   }
-//   console.log("✅ MySQL Connected...");
-// });
-
-// // ------------------- Admin API -------------------
-// app.get("/contacts", (req, res) => {
-//   const sql = "SELECT * FROM contacts ORDER BY created_at DESC";
-
-//   db.query(sql, (err, results) => {
-//     if (err) {
-//       console.error("❌ Error fetching contacts:", err);
-//       return res.status(500).json({ message: "Error fetching contacts" });
-//     }
-//     res.json(results); // send contacts as JSON
-//   });
-// });
-
-
-// // ------------------- Index Page Route -------------------
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "index.html"));
-// });
-
-
-// // ------------------- API Endpoint -------------------
-// app.post("/save", (req, res) => {
-//   console.log("Received data:", req.body);
-
-//   const { name, email, message } = req.body;
-
-//   if (!name || !email || !message) {
-//     return res.status(400).json({ message: "Error: All fields are required." });
-//   }
-
-//   // 1️⃣ Insert into MySQL
-//   const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
-//   db.query(sql, [name, email, message], (err, result) => {
-//     if (err) {
-//       console.error("❌ Error saving to MySQL:", err);
-//       return res.status(500).json({ message: "Error saving to database." });
-//     }
-
-//     console.log("✅ Data inserted into MySQL 🚀");
-
-//     // 2️⃣ Also Save into data.json
-//     const filePath = "./data.json";
-
-//     fs.readFile(filePath, "utf8", (err, data) => {
-//       if (err && err.code !== "ENOENT") {
-//         console.error("❌ Error reading JSON file:", err);
-//         return res.status(500).json({ message: "Error saving to JSON." });
-//       }
-
-//       const database = data ? JSON.parse(data) : [];
-//       database.push({ name, email, message, created_at: new Date() });
-
-//       fs.writeFile(filePath, JSON.stringify(database, null, 2), (writeErr) => {
-//         if (writeErr) {
-//           console.error("❌ Error writing JSON file:", writeErr);
-//           return res.status(500).json({ message: "Error saving to JSON." });
-//         }
-
-//         console.log("✅ Data also saved to data.json 🚀");
-//         res.status(200).json({ message: "Data saved to MySQL + JSON 🚀!" });
-//       });
-//     });
-//   });
-// });
-// // ------------------- Start Server -------------------
-// app.listen(PORT, () => {
-//   console.log(`✅ Server 👩‍💻 running at http://localhost:${PORT}`);
-// });
-
-
-
-
-// // ===============================================UPDATED SERVER=======================================================
-
-// // // ==================== server.js ====================
-
-// const express = require("express");
-// const dotenv = require("dotenv");
-// const bcrypt = require("bcrypt");
-// const cors = require("cors");
-// const path = require("path");
-// // const bodyParser = require('body-parser');
-// const mysql = require("mysql2"); // ✅ using mysql2 now
-// const fs = require("fs");
-// const http = require("http");      // ✅ needed for socket.io
-// const { Server } = require("socket.io");
-
-// // ------------------- Load Env -------------------
-// dotenv.config();
-
-// // ------------------- Express & Socket Setup -------------------
-// const app = express();
-// const server = http.createServer(app); // ✅ wrap express server
-// const io = new Server(server);
-
-// const PORT = 3000;
-
-// // ------------------- Middleware -------------------
-// app.use(cors());
-// app.use(express.json());
-// // Serve static files from the "public" directory
-// app.use(express.static(path.join(__dirname, 'public')));
-
-
-// // ------------------- MySQL Connection (portfolio_db) -------------------
-// const db = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",       // 🔹 your MySQL username
-//   password: " S3rver#@",       // 🔹 your MySQL password (if set)
-//   database: "portfolio_db"
-// });
-
-
-// // // If you want to connect to a second database, create a second connection:
-// // const dbAuth = mysql.createConnection({
-// //   host: "localhost",
-// //   user: "root",
-// //   password: " S3rver#@",
-// //   database: "auth_system"
-// // });
-
-// db.connect((err) => {
-//   if (err) {
-//     console.error("❌ MySQL Connection Failed:", err);
-//     return;
-//   }
-//   console.log("✅ MySQL Connected...");
-// });
-
-// // ------------------- API to Fetch Contacts -------------------
-// app.get("/contacts", (req, res) => {
-//   const sql = "SELECT * FROM contacts ORDER BY created_at DESC";
-//   db.query(sql, (err, results) => {
-//     if (err) {
-//       console.error("❌ Error fetching contacts:", err);
-//       return res.status(500).json({ message: "Error fetching contacts" });
-//     }
-//     res.json(results);
-//   });
-// });
-
-// // ------------------- Middleware for JWT Auth -------------------
-// const jwt = require("jsonwebtoken");
-
-// function authenticateToken(req, res, next) {
-//   const authHeader = req.headers['authorization'];
-//   const token = authHeader && authHeader.split(' ')[1];
-//   if (!token) return res.status(401).json({ message: 'Access token required' });
-
-//   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-//     if (err) return res.status(403).json({ message: 'Invalid or expired token' });
-//     req.user = user;
-//     next();
-//   });
-// }
-
-// // ------------------- Index Page -------------------
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname,"public", "index.html"));
-// });
-// app.get("/ven.html", authenticateToken, (req, res) => {
-//   res.sendFile(path.join(__dirname,"public", "ven.html"));
-// });
-
-// // ------------------- API to Save Contact -------------------
-// app.post("/save", (req, res) => {
-//   console.log("Received data:", req.body);
-
-//   const { name, email, message } = req.body;
-
-//   if (!name || !email || !message) {
-//     return res.status(400).json({ message: "Error: All fields are required." });
-//   }
-
-//   // 1️⃣ Insert into MySQL
-//   const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
-//   db.query(sql, [name, email, message], (err) => {
-//     if (err) {
-//       console.error("❌ Error saving to MySQL:", err);
-//       return res.status(500).json({ message: "Error saving to database." });
-//     }
-
-//     console.log("✅ Data inserted into MySQL 🚀");
-
-//     // 2️⃣ Also Save into data.json
-//     const filePath = "./data.json";
-//     fs.readFile(filePath, "utf8", (err, data) => {
-//       if (err && err.code !== "ENOENT") {
-//         console.error("❌ Error reading JSON file:", err);
-//         return res.status(500).json({ message: "Error saving to JSON." });
-//       }
-
-//       const database = data ? JSON.parse(data) : [];
-//       database.push({ name, email, message, created_at: new Date() });
-
-//       fs.writeFile(filePath, JSON.stringify(database, null, 2), (writeErr) => {
-//         if (writeErr) {
-//           console.error("❌ Error writing JSON file:", writeErr);
-//           return res.status(500).json({ message: "Error saving to JSON." });
-//         }
-
-//         console.log("✅ Data also saved to data.json 🚀");
-
-//         // 3️⃣ Fetch full updated contact list
-//         db.query("SELECT * FROM contacts ORDER BY created_at DESC", (err, results) => {
-//           if (err) {
-//             console.error("❌ Error fetching updated contacts:", err);
-//             return res.status(500).json({ message: "Error fetching updated contacts." });
-//           }
-
-//           // 4️⃣ Broadcast full list to all clients
-//           io.emit("contacts_update", results);
-
-//           res.status(200).json({ message: "Data saved + broadcasted 🚀!" });
-//         });
-//       });
-//     });
-//   });
-// });
-
-// // ------------------- WebSocket Connection -------------------
-// io.on("connection", (socket) => {
-//   console.log("🔌 New client connected:", socket.id);
-
-//   // Send current contacts immediately on connection
-//   db.query("SELECT * FROM contacts ORDER BY created_at DESC", (err, results) => {
-//     if (!err) {
-//       socket.emit("contacts_update", results);
-//     }
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log("❌ Client disconnected:", socket.id);
-//   });
-// });
-// // ===================================================
-// // 🔹 AUTH SYSTEM SETUP
-// // ===================================================
-
-// const authRoutes = require("./public/routes/auth"); // ✅ correct path to auth routes
-
-// // Mount auth routes at /auth
-// app.use("/auth", authRoutes);
-
-// // ===================================================
-// // 🔹 ADMIN API with Auth
-// // ===================================================
-
-// // Protected route for admin contacts
-// app.get("/admin/contacts", authenticateToken, (req, res) => {
-//   const sql = "SELECT * FROM contacts ORDER BY created_at DESC";
-//   db.query(sql, (err, results) => {
-//     if (err) {
-//       console.error("❌ Error fetching contacts:", err);
-//       return res.status(500).json({ message: "Error fetching contacts" });
-//     }
-//     res.json(results);
-//   });
-// });
-
-// // ===================================================
-// // 🔹 Start Server
-// // ===================================================
-// // ------------------- Start Server -------------------
-// server.listen(PORT, () => {
-//   console.log(`✅ Server 👩‍💻 running at http://localhost:${PORT}`);
-// });
-
-
-
-// =====================================TWO DATABASE UPDATED SERVER==============================================================
-
-// ==================== server.js ====================
-
-// const express = require("express");
-// const dotenv = require("dotenv");
-// const cors = require("cors");
-// const path = require("path");
-// const mysql = require("mysql2");
-// const fs = require("fs");
-// const http = require("http");
-// const { Server } = require("socket.io");
-
-// // ------------------- Load Env -------------------
-// dotenv.config();
-
-// // ------------------- Express & Socket Setup -------------------
-// const app = express();
-// const server = http.createServer(app);
-// const io = new Server(server);
-
-// const PORT = 3000;
-
-// // ------------------- Middleware -------------------
-// app.use(cors());
-// app.use(express.json());
-// app.use(express.static(path.join(__dirname, "public")));
-
-// // ------------------- MySQL Connection (portfolio_db) -------------------
-// const db = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: " S3rver#@",
-//   database: "portfolio_db"
-// });
-
-// db.connect((err) => {
-//   if (err) {
-//     console.error("❌ MySQL Connection Failed:", err);
-//     return;
-//   }
-//   console.log("✅ MySQL Connected (portfolio_db)...");
-// });
-
-// // ------------------- API: Fetch Contacts -------------------
-// app.get("/contacts", (req, res) => {
-//   const sql = "SELECT * FROM contacts ORDER BY created_at DESC";
-//   db.query(sql, (err, results) => {
-//     if (err) {
-//       console.error("❌ Error fetching contacts:", err);
-//       return res.status(500).json({ message: "Error fetching contacts" });
-//     }
-//     res.json(results);
-//   });
-// });
-
-// // ------------------- Index Page -------------------
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "index.html"));
-// });
-
-// // ------------------- API: Save Contact -------------------
-// app.post("/save", (req, res) => {
-//   console.log("Received data:", req.body);
-
-//   const { name, email, message } = req.body;
-
-//   if (!name || !email || !message) {
-//     return res.status(400).json({ message: "Error: All fields are required." });
-//   }
-
-//   const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
-//   db.query(sql, [name, email, message], (err) => {
-//     if (err) {
-//       console.error("❌ Error saving to MySQL:", err);
-//       return res.status(500).json({ message: "Error saving to database." });
-//     }
-
-//     console.log("✅ Data inserted into MySQL 🚀");
-
-//     const filePath = "./data.json";
-//     fs.readFile(filePath, "utf8", (err, data) => {
-//       if (err && err.code !== "ENOENT") {
-//         console.error("❌ Error reading JSON file:", err);
-//         return res.status(500).json({ message: "Error saving to JSON." });
-//       }
-
-//       const database = data ? JSON.parse(data) : [];
-//       database.push({ name, email, message, created_at: new Date() });
-
-//       fs.writeFile(filePath, JSON.stringify(database, null, 2), (writeErr) => {
-//         if (writeErr) {
-//           console.error("❌ Error writing JSON file:", writeErr);
-//           return res.status(500).json({ message: "Error saving to JSON." });
-//         }
-
-//         console.log("✅ Data also saved to data.json 🚀");
-
-//         db.query("SELECT * FROM contacts ORDER BY created_at DESC", (err, results) => {
-//           if (err) {
-//             console.error("❌ Error fetching updated contacts:", err);
-//             return res.status(500).json({ message: "Error fetching updated contacts." });
-//           }
-
-//           io.emit("contacts_update", results);
-
-//           res.status(200).json({ message: "Data saved + broadcasted 🚀!" });
-//         });
-//       });
-//     });
-//   });
-// });
-
-// // ------------------- WebSocket -------------------
-// io.on("connection", (socket) => {
-//   console.log("🔌 New client connected:", socket.id);
-
-//   db.query("SELECT * FROM contacts ORDER BY created_at DESC", (err, results) => {
-//     if (!err) {
-//       socket.emit("contacts_update", results);
-//     }
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log("❌ Client disconnected:", socket.id);
-//   });
-// });
-
-// // ===================================================
-// // 🔹 AUTH SYSTEM SETUP
-// // ===================================================
-
-// // const authRoutes = require(".public/routes/auth");
-// const authRoutes = require("./public/routes/auth"); // ✅ correct path to auth routes
-
-
-
-// // Mount auth routes at /auth
-// app.use("/auth", authRoutes);
-
-// // ===================================================
-// // 🔹 Start Server
-// // ===================================================
-// server.listen(PORT, () => {
-//   console.log(`✅ Server 👩‍💻 running at http://localhost:${PORT}`);
-// });
-
-
-
-
-
-
-
-
-
-
-// new updated server.js file starts here
-
-// ==================== server.js ====================
-// Main server file for the portfolio application with authentication, contact form, and real-time updates.
-// Handles Express setup, MySQL database connections, JWT authentication, Socket.IO for real-time features,
-// and serves static files from the public directory.
-
-// const express = require("express");
-// const dotenv = require("dotenv");
-// const cors = require("cors");
-// const path = require("path");
-// const mysql = require("mysql2"); // Using mysql2 for better performance and promises support
-// const fs = require("fs");
-// const http = require("http"); // Required for Socket.IO integration
-// const { Server } = require("socket.io");
-// const jwt = require("jsonwebtoken");
-// const cookieParser = require('cookie-parser');
-
-// // Load environment variables from .env file
-// dotenv.config();
-
-// // Express & Socket.IO Setup
-// const app = express();
-// const server = http.createServer(app);
-// const io = new Server(server);
-// const PORT = process.env.PORT || 3000;
-
-// // Middleware
-// app.use(cors({
-//   origin: true,
-//   credentials: true // Allow cookies to be sent
-// }));
-// app.use(express.json());
-// app.use(cookieParser()); // Required to read cookies
-// app.use(express.static(path.join(__dirname, 'public'))); // Public folder
-
-// // MySQL Database Connection
-// const db = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASS,
-//   database: process.env.DB_NAME,
-//   connectTimeout: 10000 // 10 seconds
-// });
-
-// // Connect to database
-// db.connect((err) => {
-//   if (err) {
-//     console.error("❌ MySQL Connection Failed:", err);
-//     process.exit(1);
-//   }
-//   console.log("✅ MySQL Connected to portfolio_db...");
-// });
-
-// // JWT Authentication Middleware
-// function authenticateToken(req, res, next) {
-//   // Try to get token from cookie first
-//   const token = req.cookies?.auth_token || (req.headers['authorization'] && req.headers['authorization'].split(' ')[1]);
-//   if (!token) return res.status(401).json({ message: 'Access token required' });
-
-//   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-//     if (err) return res.status(403).json({ message: 'Invalid or expired token' });
-//     req.user = user; // Attach user info to request
-//     next();
-//   });
-// }
-
-// // Routes
-// // Serve main portfolio page
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "index.html"));
-// });
-
-// // Serve protected dashboard page
-// app.get("/ven.html", authenticateToken, (req, res) => {
-//   res.sendFile(path.join(__dirname, "private", "ven.html"));
-// });
-
-// // API: Fetch all contacts (public)
-// app.get("/contacts", (req, res) => {
-//   const sql = "SELECT * FROM contacts ORDER BY created_at DESC";
-//   db.query(sql, (err, results) => {
-//     if (err) {
-//       console.error("❌ Error fetching contacts:", err);
-//       return res.status(500).json({ message: "Error fetching contacts" });
-//     }
-//     res.json(results);
-//   });
-// });
-
-// // API: Save contact form data
-// app.post("/save", (req, res) => {
-//   console.log("Received contact data:", req.body);
-//   const { name, email, message } = req.body;
-//   if (!name || !email || !message) return res.status(400).json({ message: "All fields are required." });
-
-//   const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
-//   db.query(sql, [name, email, message], (err) => {
-//     if (err) {
-//       console.error("❌ Error saving to MySQL:", err);
-//       return res.status(500).json({ message: "Error saving to database." });
-//     }
-//     console.log("✅ Data inserted into MySQL");
-
-//     // Save to JSON backup
-//     const filePath = "./data.json";
-//     fs.readFile(filePath, "utf8", (err, data) => {
-//       const database = data ? JSON.parse(data) : [];
-//       database.push({ name, email, message, created_at: new Date() });
-
-//       fs.writeFile(filePath, JSON.stringify(database, null, 2), (writeErr) => {
-//         if (writeErr) {
-//           console.error("❌ Error writing JSON file:", writeErr);
-//           return res.status(500).json({ message: "Error saving to JSON." });
-//         }
-//         console.log("✅ Data also saved to data.json");
-
-//         // Broadcast updates
-//         db.query("SELECT * FROM contacts ORDER BY created_at DESC", (err, results) => {
-//           if (err) return console.error("❌ Error fetching updated contacts:", err);
-//           io.emit("contacts_update", results);
-//           res.status(200).json({ message: "Data saved and broadcasted successfully!" });
-//         });
-//       });
-//     });
-//   });
-// });
-
-// // Socket.IO: real-time connection
-// io.on("connection", (socket) => {
-//   console.log("🔌 New client connected:", socket.id);
-//   db.query("SELECT * FROM contacts ORDER BY created_at DESC", (err, results) => {
-//     if (!err) socket.emit("contacts_update", results);
-//   });
-//   socket.on("disconnect", () => console.log("❌ Client disconnected:", socket.id));
-// });
-
-// // Auth Routes
-// const authRoutes = require("./public/routes/auth");
-// app.use("/auth", authRoutes);
-
-// // Protected Admin API
-// app.get("/admin/contacts", authenticateToken, (req, res) => {
-//   const sql = "SELECT * FROM contacts ORDER BY created_at DESC";
-//   db.query(sql, (err, results) => {
-//     if (err) return res.status(500).json({ message: "Error fetching contacts" });
-//     res.json(results);
-//   });
-// });
-
-// // Start server
-// server.listen(PORT, () => {
-//   console.log(`✅ Server running at http://localhost:${PORT}`);
-// }).on('error', (err) => {
-//   if (err.code === 'EADDRINUSE') {
-//     console.warn(`⚠️ Port ${PORT} in use, retrying on port ${PORT + 1}...`);
-//     server.listen(PORT + 1);
-//   } else {
-//     console.error('❌ Server startup error:', err);
-//   }
-// });
-
-
-
-// ==================== server.js ====================
-// Main server file for portfolio app with MySQL + MongoDB hybrid setup
-// Includes JWT auth, Socket.IO, file saving, and live updates.
-
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
-const mysql = require("mysql2");
 const fs = require("fs");
 const http = require("http");
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const mongoose = require("mongoose"); // ✅ Added for MongoDB Atlas
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
-
+const multer = require('multer');
+const sharp = require("sharp");
+const Profile = require('./public/models/Profile');
 
 // ============================================
 // Load environment variables
@@ -758,22 +29,40 @@ const PORT = process.env.PORT || 3000;
 // ============================================
 // Middleware
 // ============================================
-app.use(cors({
-  origin: true,
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // ============================================
-// ✅ MongoDB Connection (Atlas)
+// Multer setup for profile image upload
+// ============================================
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  fileFilter: (req, file, cb) => {
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowed.includes(file.mimetype)) {
+      return cb(new Error("Only JPEG, PNG, and WEBP files allowed"));
+    }
+    cb(null, true);
+  },
+});
+
+// ============================================
+// MongoDB Connection (Atlas)
 // ============================================
 (async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
+      // modern driver options don't need useNewUrlParser/useUnifiedTopology
+      // those warnings are safe to ignore for now
     });
     console.log("✅ MongoDB Atlas Connected Successfully...");
   } catch (error) {
@@ -782,41 +71,24 @@ app.use(express.static(path.join(__dirname, "public")));
 })();
 
 // ============================================
-// ✅ MongoDB Schema & Model
+// MongoDB Schema & Model
 // ============================================
 const ContactSchema = new Schema({
   name: String,
   email: String,
   message: String,
-  created_at: { type: Date, default: Date.now }
+  created_at: { type: Date, default: Date.now },
 });
-
 const MongoContact = mongoose.model("Contact", ContactSchema);
-
-// ============================================
-// MySQL Connection Setup
-// ============================================
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  connectTimeout: 10000
-});
-
-db.connect((err) => {
-  if (err) {
-    console.error("❌ MySQL Connection Failed:", err);
-    process.exit(1);
-  }
-  console.log("✅ MySQL Connected to portfolio_db...");
-});
 
 // ============================================
 // JWT Authentication Middleware
 // ============================================
 function authenticateToken(req, res, next) {
-  const token = req.cookies?.auth_token || (req.headers["authorization"] && req.headers["authorization"].split(" ")[1]);
+  const token =
+    req.cookies?.auth_token ||
+    (req.headers["authorization"] &&
+      req.headers["authorization"].split(" ")[1]);
   if (!token) return res.status(401).json({ message: "Access token required" });
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
@@ -840,104 +112,190 @@ app.get("/ven.html", authenticateToken, (req, res) => {
   res.sendFile(path.join(__dirname, "private", "ven.html"));
 });
 
-// Fetch contacts (MySQL)
-app.get("/contacts", (req, res) => {
-  const sql = "SELECT * FROM contacts ORDER BY created_at DESC";
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error("❌ Error fetching contacts:", err);
-      return res.status(500).json({ message: "Error fetching contacts" });
-    }
-    res.json(results);
-  });
+// Fetch contacts
+app.get("/contacts", async (req, res) => {
+  try {
+    const contacts = await MongoContact.find().sort({ created_at: -1 });
+    res.json(contacts);
+  } catch (err) {
+    console.error("❌ Error fetching contacts:", err);
+    res.status(500).json({ message: "Error fetching contacts" });
+  }
 });
 
 // ============================================
-// ✅ Save contact (MySQL + MongoDB + JSON + Real-time)
+// Fetch Profile Image
+// Auto-load from local assets if DB empty
+// Returns binary image
+// ============================================
+app.get("/profile", async (req, res) => {
+  try {
+    let profile = await Profile.findOne().sort({ created_at: -1 });
+
+    if (!profile) {
+      const imgPath = path.join(__dirname, "public", "assets", "b2.png");
+      if (!fs.existsSync(imgPath)) {
+        return res.status(404).json({ message: "Local profile image not found" });
+      }
+
+      const imgData = fs.readFileSync(imgPath);
+      const newProfile = new Profile({
+        name: "Suraj Dhawal",
+        title: "Full Stack Developer",
+        profilePic: { data: imgData, contentType: "image/png" },
+      });
+      profile = await newProfile.save();
+      console.log("✅ Local profile image auto-saved to MongoDB Atlas.");
+    }
+
+    if (!profile.profilePic || !profile.profilePic.data) {
+      return res.status(404).json({ message: "Profile picture not found" });
+    }
+
+    res.set("Content-Type", profile.profilePic.contentType);
+    res.send(profile.profilePic.data);
+  } catch (err) {
+    console.error("❌ Error fetching profile:", err);
+    res.status(500).json({ message: "Failed to fetch profile" });
+  }
+});
+// ============================================
+// ✅ Get Profile Metadata (Secure, Admin-only)
+// ============================================
+app.get("/profile/meta", authenticateToken, async (req, res) => {
+  try {
+    const profile = await Profile.findOne().sort({ created_at: -1 });
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+
+    res.json({
+      name: profile.name,
+      title: profile.title,
+      bio: profile.bio,
+      profilePicUrl: profile.profilePicUrl ? profile.profilePicUrl : "/profile",
+      created_at: profile.created_at,
+    });
+  } catch (err) {
+    console.error("❌ Error fetching profile metadata:", err);
+    res.status(500).json({ message: "Failed to fetch profile metadata" });
+  }
+});
+
+// ============================================
+// Upload Profile Image (JWT-protected + compress via sharp)
+// - input field name expected: "profilePic"
+// - requires valid JWT cookie or Authorization header
+// ============================================
+app.post("/upload-profile", authenticateToken, upload.single('profilePic'), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ message: "No file uploaded" });
+
+    // Log admin user who uploaded (from token)
+    const adminEmail = req.user?.email || "unknown";
+
+    console.log(`📸 Admin (${adminEmail}) uploaded profile: ${req.file.originalname}`);
+
+    // compress + convert to webp (max width 800)
+    const compressedBuffer = await sharp(req.file.buffer)
+      .resize({ width: 800, withoutEnlargement: true })
+      .webp({ quality: 90 })
+      .toBuffer();
+
+    // remove old profile(s) and save new one (keep only latest)
+    await Profile.deleteMany({});
+    const newProfile = new Profile({
+      name: req.body.name || "Suraj Dhawal",
+      title: req.body.title || "Full Stack Developer",
+      profilePic: { data: compressedBuffer, contentType: "image/webp" },
+      created_at: new Date(),
+    });
+    await newProfile.save();
+
+    console.log("✅ Profile uploaded, optimized and saved to MongoDB.");
+
+    return res.status(200).json({ success: true, message: "Profile uploaded successfully" });
+  } catch (err) {
+    console.error("❌ Error uploading profile:", err);
+    // Multer file-size error handling
+    if (err.code === "LIMIT_FILE_SIZE") {
+      return res.status(413).json({ success: false, message: "File too large. Max 10MB allowed." });
+    }
+    return res.status(500).json({ success: false, message: "Failed to upload profile" });
+  }
+});
+
+// ============================================
+// Save contact (MongoDB + JSON + Real-time)
 // ============================================
 app.post("/save", async (req, res) => {
-  console.log("📩 Received contact data:", req.body);
   const { name, email, message } = req.body;
   if (!name || !email || !message)
     return res.status(400).json({ message: "All fields are required." });
 
-  // Save to MySQL
-  const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
-  db.query(sql, [name, email, message], async (err) => {
-    if (err) {
-      console.error("❌ Error saving to MySQL:", err);
-      return res.status(500).json({ message: "Error saving to database." });
-    }
-    console.log("✅ Data inserted into MySQL");
+  try {
+    const newContact = await MongoContact.create({ name, email, message });
 
-    // Save to MongoDB
-    try {
-      await MongoContact.create({ name, email, message });
-      console.log("✅ Data inserted into MongoDB Atlas");
-    } catch (mongoErr) {
-      console.error("❌ Error saving to MongoDB:", mongoErr);
-    }
-
-    // Save to local JSON
     const filePath = "./data.json";
-    fs.readFile(filePath, "utf8", (err, data) => {
-      const database = data ? JSON.parse(data) : [];
-      database.push({ name, email, message, created_at: new Date() });
+    let database = [];
+    if (fs.existsSync(filePath)) {
+      const data = fs.readFileSync(filePath, "utf8");
+      database = data ? JSON.parse(data) : [];
+    }
+    database.push(newContact);
+    fs.writeFileSync(filePath, JSON.stringify(database, null, 2));
 
-      fs.writeFile(filePath, JSON.stringify(database, null, 2), (writeErr) => {
-        if (writeErr) {
-          console.error("❌ Error writing JSON file:", writeErr);
-          return res.status(500).json({ message: "Error saving to JSON." });
-        }
-        console.log("✅ Data also saved to data.json");
+    const contacts = await MongoContact.find().sort({ created_at: -1 });
+    io.emit("contacts_update", contacts);
 
-        // Broadcast updated contact list
-        db.query("SELECT * FROM contacts ORDER BY created_at DESC", (err, results) => {
-          if (err) return console.error("❌ Error fetching updated contacts:", err);
-          io.emit("contacts_update", results);
-          res.status(200).json({ message: "Data saved to all sources successfully!" });
-        });
-      });
-    });
-  });
+    res.status(200).json({ message: "Data saved successfully!" });
+  } catch (err) {
+    console.error("❌ Error saving contact:", err);
+    res.status(500).json({ message: "Error saving to database." });
+  }
 });
 
 // ============================================
 // Socket.IO Live Updates
 // ============================================
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   console.log("🔌 New client connected:", socket.id);
-  db.query("SELECT * FROM contacts ORDER BY created_at DESC", (err, results) => {
-    if (!err) socket.emit("contacts_update", results);
-  });
+  try {
+    const contacts = await MongoContact.find().sort({ created_at: -1 });
+    socket.emit("contacts_update", contacts);
+  } catch (err) {
+    console.error("❌ Error sending contacts via socket:", err);
+  }
+
   socket.on("disconnect", () => console.log("❌ Client disconnected:", socket.id));
 });
 
 // ============================================
-// Auth Routes (unchanged)
+// Auth Routes
 // ============================================
 const authRoutes = require("./public/routes/auth");
 app.use("/auth", authRoutes);
 
-// Protected Admin API (unchanged)
-app.get("/admin/contacts", authenticateToken, (req, res) => {
-  const sql = "SELECT * FROM contacts ORDER BY created_at DESC";
-  db.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ message: "Error fetching contacts" });
-    res.json(results);
-  });
+// Protected Admin API
+app.get("/admin/contacts", authenticateToken, async (req, res) => {
+  try {
+    const contacts = await MongoContact.find().sort({ created_at: -1 });
+    res.json(contacts);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching contacts" });
+  }
 });
 
 // ============================================
 // Start Server
 // ============================================
-server.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
-}).on("error", (err) => {
-  if (err.code === "EADDRINUSE") {
-    console.warn(`⚠️ Port ${PORT} in use, retrying on port ${PORT + 1}...`);
-    server.listen(PORT + 1);
-  } else {
-    console.error("❌ Server startup error:", err);
-  }
-});
+server
+  .listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`))
+  .on("error", (err) => {
+    if (err.code === "EADDRINUSE") {
+      console.warn(`⚠️ Port ${PORT} in use, retrying on port ${PORT + 1}...`);
+      server.listen(PORT + 1);
+    } else {
+      console.error("❌ Server startup error:", err);
+    }
+  });
