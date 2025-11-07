@@ -7,6 +7,8 @@ test-db.js
 test.html
 test.txt
 data.json
+commit-smart.ps1
+# commit-smart.ps1
 # Environment variables
 .env
 .env.local
