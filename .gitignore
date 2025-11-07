@@ -6,6 +6,7 @@ yarn-error.log*
 test-db.js
 test.html
 test.txt
+data.json
 # Environment variables
 .env
 .env.local
