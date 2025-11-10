@@ -80,7 +80,33 @@ async function loadData() {
                     tech: ['JavaScript', 'HTML', 'CSS']
                 }
             ],
-            experience: [{ title: 'Intern', company: 'Nepal Telecom', from: 'Jan 2024', to: 'Apr 2024', location: 'Lumbini, Nepal', bullets: ['Customer Relationship Management (CRM)', 'Computer Networking', 'On-site internship tasks and teamwork'] }],
+            experience: [
+                {
+                    title: 'Intern',
+                    company: 'Nepal Telecom',
+                    from: 'Jan 2024',
+                    to: 'Apr 2024',
+                    location: 'Lumbini, Nepal',
+                    bullets: [
+                        'Customer Relationship Management (CRM)',
+                        'Computer Networking',
+                        'On-site internship tasks and teamwork'
+                    ]
+                },
+                {
+                    title: 'Java Programming Intern',
+                    company: 'Z1 Technology & Trade Pvt. Ltd.',
+                    from: 'Sep 2024',
+                    to: 'Mar 2025',
+                    location: 'Bhairahawa, Nepal',
+                    bullets: [
+                        'Worked on software development projects focusing on Java programming and related technologies',
+                        'Gained hands-on experience in real-world application development under the supervision of the technical team',
+                        'Collaborated with professionals to strengthen backend logic, debugging, and code optimization skills'
+                    ]
+                }
+            ],
+
             education: [{ school: 'Rupandehi Lilaram Neupane Secondary School', degree: 'Diploma in Computer Engineering (DCOM)', from: 'Feb 2020', to: 'Jan 2024', grade: '73.48%' }, { school: 'Little Paradise English Medium School', degree: 'SEE', grade: 'A' }],
             certs: [{ title: 'Google Cloud Skills Boost', issuer: 'Google', date: 'Jun 2024' }, { title: 'NET Aspire Introduction', issuer: 'STYAVA.DEV', date: 'Aug 2024' }, { title: 'Generative AI', issuer: 'Various', date: '2024' }]
         };
@@ -128,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async function () {
               <div class="z-10 flex flex-col items-center text-center drop-shadow-[0_0_10px_rgba(168,85,247,0.9)]">
                   <img src="${it.icon}" 
                       alt="${it.name}" 
-                      loading="lazy"
+                      loading="eager"
                       class="w-8 h-8 sm:w-10 sm:h-10 object-contain transform scale-110 animate-float">
                   <span class="text-xs sm:text-sm mt-1 text-violet-300">${it.name}</span>
               </div>
