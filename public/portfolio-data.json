@@ -65,13 +65,18 @@
         "name": "MySQL",
         "level": 75,
         "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+      },
+      {
+        "name": "",
+        "level": 77,
+        "icon": "./assets/icons/mongoDB.png"
       }
     ],
     "other": [
       {
         "name": "",
         "level": 65,
-        "icon": "./assets/icons/cybersecurity.png"
+        "icon": "./assets/icons/cybersecurity_logo.png"
       },
       {
         "name": "",
@@ -173,6 +178,18 @@
         "Computer Networking",
         "On-site internship tasks and teamwork"
       ]
+    },
+    {
+      "title": "Java Programming Intern",
+      "company": "Z1 Technology & Trade Pvt. Ltd.",
+      "from": "Sep 2024",
+      "to": "Mar 2025",
+      "location": "Bhairahawa, Nepal",
+      "bullets": [
+        "Worked on software development projects focusing on Java programming and related technologies",
+        "Gained practical experience in real-world application development under professional supervision",
+        "Collaborated with the technical team to improve code efficiency, debugging, and backend functionality"
+      ]
     }
   ],
   "education": [
@@ -191,6 +208,26 @@
   ],
   "certs": [
     {
+      "title": "Java",
+      "issuer": "Apna College",
+      "date": "2025"
+    },
+    {
+      "title": "Introduction to Career Skills in Software Development",
+      "issuer": "LinkedIn",
+      "date": " May 2024"
+    },
+    {
+      "title": "Career Essentials in Cybersecurity by Microsoft and LinkedIn",
+      "issuer": "Microsoft",
+      "date": " Mar 2024"
+    },
+    {
+      "title": "Tata Consultancy Services  - Cybersecurity Analyst Job Simulation",
+      "issuer": "Forage",
+      "date": "Feb 2024"
+    },
+    {
       "title": "Google Cloud Skills Boost",
       "issuer": "Google",
       "date": "Jun 2024"
@@ -204,6 +241,31 @@
       "title": "Generative AI",
       "issuer": "Various",
       "date": "2024"
+    },
+    {
+      "title": "Programming Foundations: Fundamentals",
+      "issuer": "LinkedIn",
+      "date": "May 2024"
+    },
+    {
+      "title": "Cybersecurity Foundations",
+      "issuer": "LinkedIn",
+      "date": " Mar 2024"
+    },
+    {
+      "title": "The Cybersecurity Threat Landscape",
+      "issuer": "LinkedIn",
+      "date": "Mar 2024"
+    },
+    {
+      "title": "Data Science || Ai || ML",
+      "issuer": "ISMT College",
+      "date": "Jun 2024 "
+    },
+    {
+      "title": "Cybersecurity Awareness: Cybersecurity Terminology",
+      "issuer": "Sam Yankelevitch's LinkedIn Learning Courses",
+      "date": "Mar 2024"
     }
   ]
 }
