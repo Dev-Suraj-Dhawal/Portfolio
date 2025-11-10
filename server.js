@@ -303,7 +303,6 @@
 
 
 
-
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -380,8 +379,10 @@ if (isProduction) {
           "'self'", 
           "'unsafe-inline'",
           "https://cdnjs.cloudflare.com",
-          "https://unpkg.com"
+          "https://unpkg.com",
+          "https://cdn.tailwindcss.com"
         ],
+        scriptSrcAttr: ["'unsafe-inline'"], // Allow inline event handlers
         imgSrc: [
           "'self'", 
           "data:", 
@@ -603,6 +604,15 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+// Serve portfolio data JSON (ADDED)
+app.get("/portfolio-data.json", (req, res) => {
+  const dataPath = path.join(__dirname, "public", "portfolio-data.json");
+  if (!fs.existsSync(dataPath)) {
+    return res.status(404).json({ message: "Portfolio data not found" });
+  }
+  res.sendFile(dataPath);
+});
+
 // Protected page
 app.get("/ven.html", authenticateToken, (req, res) => {
   const filePath = path.join(__dirname, "private", "ven.html");
@@ -737,52 +747,70 @@ app.post("/upload-profile", authenticateToken, upload.single('profilePic'), asyn
 });
 
 // ============================================
-// Save contact (MongoDB + JSON + Real-time)
+// Save contact (MongoDB + Real-time) - Direct to database only
 // ============================================
 app.post("/save", async (req, res) => {
+  console.log('📬 Contact form submission received');
+  console.log('Request body:', req.body);
+  console.log('Request headers:', req.headers);
+  
   const { name, email, message } = req.body;
-  if (!name || !email || !message)
-    return res.status(400).json({ message: "All fields are required." });
+  
+  // Validation
+  if (!name || !email || !message) {
+    console.log('❌ Validation failed: Missing required fields');
+    return res.status(400).json({ 
+      success: false,
+      message: "All fields are required." 
+    });
+  }
 
-  // Email validation (PRODUCTION ENHANCEMENT)
+  // Email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    return res.status(400).json({ message: "Invalid email format." });
+    console.log('❌ Validation failed: Invalid email format');
+    return res.status(400).json({ 
+      success: false,
+      message: "Invalid email format." 
+    });
   }
 
   try {
+    // Save directly to MongoDB
     const newContact = await MongoContact.create({ 
       name: name.trim(), 
       email: email.trim().toLowerCase(), 
       message: message.trim() 
     });
 
-    // JSON file backup (disabled in production for better performance)
-    if (!isProduction) {
-      try {
-        const filePath = "./data.json";
-        let database = [];
-        if (fs.existsSync(filePath)) {
-          const data = fs.readFileSync(filePath, "utf8");
-          database = data ? JSON.parse(data) : [];
-        }
-        database.push(newContact);
-        fs.writeFileSync(filePath, JSON.stringify(database, null, 2));
-      } catch (fileErr) {
-        console.error("⚠️ Warning: Could not write to data.json:", fileErr.message);
-      }
-    }
+    console.log('✅ Contact saved to MongoDB with ID:', newContact._id);
 
+    // Get updated contacts list
     const contacts = await MongoContact.find()
       .select('-__v')
       .sort({ created_at: -1 })
       .limit(100);
+    
+    // Broadcast to Socket.IO clients
+    console.log('📡 Broadcasting update to Socket.IO clients');
     io.emit("contacts_update", contacts);
 
-    res.status(200).json({ message: "Data saved successfully!" });
+    // Send success response
+    res.status(200).json({ 
+      success: true,
+      message: "Message sent successfully!" 
+    });
+    
+    console.log('✅ Response sent successfully');
   } catch (err) {
     console.error("❌ Error saving contact:", err);
-    res.status(500).json({ message: "Error saving to database." });
+    console.error("Error details:", err.message);
+    console.error("Error stack:", err.stack);
+    
+    res.status(500).json({ 
+      success: false,
+      message: "Failed to save message. Please try again." 
+    });
   }
 });
 
