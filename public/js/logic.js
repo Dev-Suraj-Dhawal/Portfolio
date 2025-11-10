@@ -494,38 +494,50 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // FIXED: Contact Form submission to your local server
         // document.getElementById('contactForm').addEventListener('submit', async e => {
+        //Contact Form - Works in development and production
         document.getElementById('contactForm').addEventListener('submit', async e => {
             e.preventDefault();
             const form = e.target;
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             const msgEl = document.getElementById('formMsg');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn ? submitBtn.textContent : 'Send';
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+            }
             msgEl.textContent = 'Sending...';
 
             try {
-                // Submit to your local server endpoint
-                const response = await fetch('http://localhost:3000/save', {
+                const response = await fetch('/save', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
                     body: JSON.stringify(data),
                 });
 
-                if (response.ok) {
-                    const result = await response.json();
-                    msgEl.textContent = `Thanks, ${data.name}! Your message has been send✅.`;
-                    form.reset();
+                const result = await response.json();
 
+                if (response.ok) {
+                    msgEl.textContent = `✅ Thanks, ${data.name}! ${result.message || 'Your message has been sent.'}`;
+                    msgEl.className = 'text-sm text-green-400 h-4';
+                    form.reset();
                 } else {
-                    const errorResult = await response.json();
-                    throw new Error(errorResult.message || 'Server responded with an error❌.');
+                    throw new Error(result.message || 'Server error');
                 }
             } catch (error) {
-                console.error('Form submission error:', error);
-                msgEl.textContent = 'Failed to send. Please ensure the server is running or try emailing directly.';
+                console.error('Form error:', error);
+                msgEl.textContent = '❌ Failed to send. Please try again or email directly.';
+                msgEl.className = 'text-sm text-red-400 h-4';
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                }
+                setTimeout(() => { msgEl.textContent = ''; }, 5000);
             }
-            setTimeout(() => {
-                msgEl.textContent = '';
-            }, 5000);
         });
     };
 
