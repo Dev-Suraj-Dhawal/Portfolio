@@ -38,7 +38,8 @@
     "pm2": "^6.0.13",
     "sharp": "^0.34.4",
     "socket.io": "^4.8.1",
-    "xss-clean": "^0.1.4"
+    "xss-clean": "^0.1.4",
+    "lusca": "^1.7.0"
   },
   "description": "",
   "devDependencies": {

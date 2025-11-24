@@ -312,6 +312,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const lusca = require("lusca");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const multer = require('multer');
@@ -485,6 +486,7 @@ app.use(
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
+app.use(lusca.csrf());
 app.use(express.static(path.join(__dirname, "public")));
 
 // ============================================
