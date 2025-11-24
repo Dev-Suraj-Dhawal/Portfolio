@@ -8,6 +8,11 @@ test.html
 test.txt
 data.json
 commit-smart.ps1
+imgtopdf.html
+pdf.css
+b2.png
+pp.png
+profile.png
 # commit-smart.ps1
 # Environment variables
 .env

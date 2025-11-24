@@ -93,42 +93,48 @@
   "projects": [
     {
       "id": 1,
-      "title": "IELTS Class Website",
-      "icon": "fa-solid fa-book-open",
+      "title": "IMAGE TO PDF CONVERTER",
+      "icon": "fa-solid fa-file-pdf",
       "tags": [
-        "Web",
-        "HTML"
+        "Web App",
+        "Tool",
+        "JavaScript",
+        "PDF"
       ],
-      "desc": "A dedicated website for IELTS classes and resources.",
-      "thumb": "https://placehold.co/600x400/223344/e2e8f0?text=IELTS",
-      "link": "https://github.com/Dev-Suraj-Dhawal/IELTS_Class_Website",
-      "website": "https://dev-suraj-dhawal.github.io/IELTS_Class_Website/",
-      "tech": [
-        "HTML",
-        "CSS"
-      ]
-    },
-    {
-      "id": 2,
-      "title": "AI Mood Quote Generator",
-      "icon": "fa-solid fa-robot",
-      "tags": [
-        "Web",
-        "AI",
-        "JavaScript"
-      ],
-      "desc": "An interactive, AI-powered motivational quote generator.",
-      "thumb": "https://placehold.co/600x400/445566/e2e8f0?text=AI+Quote+Generator",
-      "link": "https://github.com/Dev-Suraj-Dhawal/AI-Mood-Quote-Generator",
-      "website": "https://ai-mood-quote-generator.vercel.app/",
+      "desc": "Effortlessly merge images into a clean, optimized PDF with full drag-and-drop control",
+      "thumb": "./assets/projects_icon/logo5.png",
+      "link": "https://github.com/Dev-Suraj-Dhawal/ImageToPDF",
+      "website": "https://imagetopdf-sr.vercel.app/",
       "tech": [
         "JavaScript",
         "HTML",
         "CSS",
-        "AI"
+        "Node.js",
+        "Express",
+        "jsPDF",
+        "Sortable.js"
       ]
     },
     {
+      "id": 2,
+      "title": "EMI WEB APP",
+      "icon": "fa-solid fa-calculator",
+      "tags": [
+        "Web",
+        "Tool",
+        "JavaScript"
+      ],
+      "desc": "A simple and clean EMI calculator web app.",
+      "thumb": "./assets/projects_icon/Emi_calculator.jpg",
+      "link": "https://github.com/Dev-Suraj-Dhawal/EMI_WEB_APP",
+      "website": "https://emi-web-app-pied.vercel.app",
+      "tech": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ]
+    },
+     {
       "id": 3,
       "title": "Audio Visualizer",
       "icon": "fa-solid fa-music",
@@ -137,7 +143,7 @@
         "JavaScript"
       ],
       "desc": "A glowing, animated real-time audio visualizer.",
-      "thumb": "https://placehold.co/600x400/556677/e2e8f0?text=Audio+Visualizer",
+      "thumb": "./assets/projects_icon/audio_visualizer.png",
       "link": "https://github.com/Dev-Suraj-Dhawal/audio-visualizer",
       "website": "https://audio-visualizer-ruby.vercel.app/",
       "tech": [
@@ -148,19 +154,37 @@
     },
     {
       "id": 4,
-      "title": "EMI WEB APP",
-      "icon": "fa-solid fa-calculator",
+      "title": "AI Mood Quote Generator",
+      "icon": "fa-solid fa-robot",
       "tags": [
         "Web",
-        "Tool",
+        "AI",
         "JavaScript"
       ],
-      "desc": "A simple and clean EMI calculator web app.",
-      "thumb": "https://placehold.co/600x400/667788/e2e8f0?text=EMI+Web+App",
-      "link": "https://github.com/Dev-Suraj-Dhawal/EMI_WEB_APP",
-      "website": "https://emi-web-app-pied.vercel.app/",
+      "desc": "An interactive, AI-powered motivational quote generator.",
+      "thumb": "./assets/projects_icon/Ai_Quote.jpg",
+      "link": "https://github.com/Dev-Suraj-Dhawal/AI-Mood-Quote-Generator",
+      "website": "https://ai-mood-quote-generator.vercel.app/",
       "tech": [
         "JavaScript",
+        "HTML",
+        "CSS",
+        "AI"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "IELTS Class Website",
+      "icon": "fa-solid fa-book-open",
+      "tags": [
+        "Web",
+        "HTML"
+      ],
+      "desc": "A dedicated website for IELTS classes and resources.",
+      "thumb": "./assets/projects_icon/Ielts.png",
+      "link": "https://github.com/Dev-Suraj-Dhawal/IELTS_Class_Website",
+      "website": "https://dev-suraj-dhawal.github.io/IELTS_Class_Website/",
+      "tech": [
         "HTML",
         "CSS"
       ]
