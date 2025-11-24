@@ -172,8 +172,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const filtered = (tag === 'all')
             ? DATA.projects
-            : DATA.projects.filter(p => p.tags.includes(tag));
-
+            : DATA.projects.filter(p => p.tags.some(t => t.toLowerCase() === tag)); // Case-insensitive check
         grid.innerHTML = filtered.map(p => `
         <div class="glass p-4 rounded-lg hover:scale-105 transition-transform duration-300 relative">
             
@@ -183,10 +182,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             </div>
 
             <!-- Thumbnail -->
-            <img src="${p.thumb}" alt="${p.title}" class="w-full h-40 object-cover rounded-md"/>
+            <!-- <img src="${p.thumb}" alt="${p.title}" class="w-full h-40 object-cover rounded-md"/> -->
+            <img src="${p.thumb}" alt="${p.title}" class="project-thumb w-full rounded-md"/>
+
 
             <!-- Description -->
-            <p class="text-sm text-slate-300 mt-3 h-10 text-wrap">${p.desc}</p>
+            <!-- <p class="text-sm text-slate-300 mt-3 h-10 text-wrap">${p.desc}</p> -->
+            <p class="project-desc text-sm text-slate-300 mt-3 text-wrap">${p.desc}</p>
+
 
             <!-- Buttons -->
             <div class="mt-3 flex gap-2 flex-wrap">
@@ -210,6 +213,29 @@ document.addEventListener('DOMContentLoaded', async function () {
         </div>
     `).join('');
     };
+
+    function resizeProjectThumbs() {
+        const thumbs = document.querySelectorAll(".project-thumb");
+
+        thumbs.forEach(img => {
+            const cardWidth = img.parentElement.offsetWidth;
+
+            // Dynamic height ratio (adjustable)
+            const aspectRatio = 9 / 16; // landscape ratio
+
+            const newHeight = cardWidth * aspectRatio;
+
+            img.style.height = newHeight + "px";
+            img.style.objectFit = "contain";  // no stretch
+            img.style.backgroundColor = "#0f172a"; // optional: better look
+        });
+    }
+
+    // Call it after rendering
+    setTimeout(resizeProjectThumbs, 50);
+
+    // Re-run on window resize
+    window.addEventListener("resize", resizeProjectThumbs);
 
     const renderExperience = () => {
         const timelineEl = document.getElementById('timelineList');
@@ -447,128 +473,281 @@ document.addEventListener('DOMContentLoaded', async function () {
     draw();
 
 
+    // ... (All code above initEventListeners remains the same) ...
+
+
 
     // --- EVENT LISTENERS ---
+
     const initEventListeners = () => {
+
         // Single-page navigation: Show only clicked section, hide others
+
         const navLinks = document.querySelectorAll('a[href^="#"]');
+
         navLinks.forEach(link => {
+
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    // Hide all sections
-                    document.querySelectorAll('main section').forEach(section => {
-                        section.classList.remove('active');
-                    });
-                    // Show target section
-                    targetSection.classList.add('active');
-                    // Smooth scroll to section
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
+
+
+
+                // ⭐ FIX APPLIED HERE: Do not prevent default for the project modal link.
+
+                if (link.id === 'modalLink' && link.getAttribute('href') !== '#') {
+
+                    return; // Let the browser handle the navigation to the GitHub/Website URL
+
                 }
+
+
+
+                e.preventDefault();
+
+                const targetId = link.getAttribute('href').substring(1);
+
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+
+                    // Hide all sections
+
+                    document.querySelectorAll('main section').forEach(section => {
+
+                        section.classList.remove('active');
+
+                    });
+
+                    // Show target section
+
+                    targetSection.classList.add('active');
+
+                    // Smooth scroll to section
+
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+
+                }
+
             });
+
         });
+
+
 
         // Mobile Menu
+
         const mobileMenu = document.getElementById('mobileMenu');
+
         document.getElementById('mobileMenuBtn').addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+
         document.getElementById('closeMobileMenuBtn').addEventListener('click', () => mobileMenu.classList.add('hidden'));
 
+
+
         // Project Filtering
+
         document.getElementById('projectFilters').addEventListener('click', e => {
+
             if (e.target.matches('button')) renderProjects(e.target.dataset.tag);
+
         });
+
+
 
         // Project Modal
+
         const modal = document.getElementById('projModal');
+
         document.getElementById('projectsGrid').addEventListener('click', e => {
+
             const btn = e.target.closest('.openProj');
+
             if (btn) {
+
                 const p = DATA.projects.find(x => String(x.id) === btn.dataset.id);
+
                 if (p) {
+
                     document.getElementById('modalTitle').textContent = p.title;
+
                     document.getElementById('modalDesc').textContent = p.desc;
+
                     document.getElementById('modalTech').innerHTML = (p.tech || []).map(t => `<span class="px-2 py-1 rounded-md border border-white/10 text-sm">${t}</span>`).join('');
-                    document.getElementById('modalLink').href = p.link || '#';
+
+                    // Inside your if (p) block
+
+                    // ... other code ...
+
+
+
+                    const linkElement = document.getElementById('modalLink');
+
+                    const url = p.website ? p.website : (p.link || '#'); // Priority: Website, then Link/GitHub
+
+
+
+                    linkElement.href = url;
+
+
+
+                    // Set the target attribute to ensure it opens in a new tab
+
+                    linkElement.setAttribute('target', '_blank');
+
                     modal.classList.remove('hidden');
+
                     modal.style.display = 'flex';
+
                 }
+
             }
+
         });
+
         const closeModal = () => {
+
             modal.classList.add('hidden');
+
             modal.style.display = 'none';
+
         };
+
         document.getElementById('closeModal').addEventListener('click', closeModal);
+
         modal.addEventListener('click', e => {
+
             if (e.target === modal) closeModal();
+
         });
+
         document.addEventListener('keydown', e => {
+
             if (e.key === 'Escape') closeModal();
+
         });
+
+
 
         // Contact Form & Copy Email
+
         document.getElementById('copyEmail').addEventListener('click', e => {
+
             navigator.clipboard.writeText(DATA.email).then(() => {
+
                 e.target.textContent = 'Copied!';
+
                 setTimeout(() => {
+
                     e.target.textContent = 'Copy Email';
+
                 }, 2000);
+
             });
+
         });
 
+
+
         // FIXED: Contact Form submission to your local server
+
         // document.getElementById('contactForm').addEventListener('submit', async e => {
+
         //Contact Form - Works in development and production
+
         document.getElementById('contactForm').addEventListener('submit', async e => {
+
             e.preventDefault();
+
             const form = e.target;
+
             const formData = new FormData(form);
+
             const data = Object.fromEntries(formData.entries());
+
             const msgEl = document.getElementById('formMsg');
+
             const submitBtn = form.querySelector('button[type="submit"]');
+
             const originalBtnText = submitBtn ? submitBtn.textContent : 'Send';
 
+
+
             if (submitBtn) {
+
                 submitBtn.disabled = true;
+
                 submitBtn.textContent = 'Sending...';
+
             }
+
             msgEl.textContent = 'Sending...';
 
+
+
             try {
+
                 const response = await fetch('/save', {
+
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
                     body: JSON.stringify(data),
+
                 });
+
+
 
                 const result = await response.json();
 
+
+
                 if (response.ok) {
+
                     msgEl.textContent = `✅ Thanks, ${data.name}! ${result.message || 'Your message has been sent.'}`;
+
                     msgEl.className = 'text-sm text-green-400 h-4';
+
                     form.reset();
+
                 } else {
+
                     throw new Error(result.message || 'Server error');
+
                 }
+
             } catch (error) {
+
                 console.error('Form error:', error);
+
                 msgEl.textContent = '❌ Failed to send. Please try again or email directly.';
+
                 msgEl.className = 'text-sm text-red-400 h-4';
+
             } finally {
+
                 if (submitBtn) {
+
                     submitBtn.disabled = false;
+
                     submitBtn.textContent = originalBtnText;
+
                 }
+
                 setTimeout(() => { msgEl.textContent = ''; }, 5000);
+
             }
+
         });
+
     };
 
+
+
     // --- RUN EVERYTHING ---
+
     initApp();
+
     initAnimations();
+
     initEventListeners();
+
 });
