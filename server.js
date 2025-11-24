@@ -409,7 +409,15 @@ if (isProduction) {
 } else {
   // Relaxed CSP for development (no restrictions)
   app.use(helmet({
-    contentSecurityPolicy: false,
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'", "http://localhost:*", "ws://localhost:*"],
+        scriptSrc: ["'self'", "'unsafe-eval'", "http://localhost:*"],
+        styleSrc: ["'self'", "'unsafe-inline'", "http://localhost:*"],
+        imgSrc: ["'self'", "data:", "blob:", "http://localhost:*"],
+        connectSrc: ["'self'", "ws://localhost:*", "http://localhost:*"],
+      },
+    },
     crossOriginEmbedderPolicy: false,
   }));
 }
