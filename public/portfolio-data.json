@@ -102,7 +102,7 @@
         "PDF"
       ],
       "desc": "Effortlessly merge images into a clean, optimized PDF with full drag-and-drop control",
-      "thumb": "./assets/projects_icon/logo5.png",
+      "thumb": "./assets/projects_icon/imagetopdf.png",
       "link": "https://github.com/Dev-Suraj-Dhawal/ImageToPDF",
       "website": "https://imagetopdf-sr.vercel.app/",
       "tech": [
