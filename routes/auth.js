@@ -19,8 +19,6 @@ router.post('/login', async (req, res) => {
 
     if (!email || !password)
       return res.status(400).json({ message: 'Email and password required' });
-    if (typeof email !== 'string') 
-      return res.status(400).json({ message: 'Invalid email type' });
 
     // 🔹 Find admin in MongoDB
     const admin = await AdminMongo.findOne({ email });
