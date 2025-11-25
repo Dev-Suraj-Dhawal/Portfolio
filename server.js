@@ -312,7 +312,6 @@ const http = require("http");
 const { Server } = require("socket.io");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const lusca = require("lusca");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const multer = require('multer');
@@ -409,15 +408,7 @@ if (isProduction) {
 } else {
   // Relaxed CSP for development (no restrictions)
   app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'", "http://localhost:*", "ws://localhost:*"],
-        scriptSrc: ["'self'", "'unsafe-eval'", "http://localhost:*"],
-        styleSrc: ["'self'", "'unsafe-inline'", "http://localhost:*"],
-        imgSrc: ["'self'", "data:", "blob:", "http://localhost:*"],
-        connectSrc: ["'self'", "ws://localhost:*", "http://localhost:*"],
-      },
-    },
+    contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false,
   }));
 }
@@ -494,7 +485,6 @@ app.use(
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
-app.use(lusca.csrf());
 app.use(express.static(path.join(__dirname, "public")));
 
 // ============================================
