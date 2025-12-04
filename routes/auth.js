@@ -3,15 +3,14 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 const AdminMongo = require('../models/Admin');
 const router = express.Router();
 
 /**
- * ===========================
  * POST /auth/login (MongoDB Only)
- * ===========================
  */
 router.post('/login', async (req, res) => {
   try {
@@ -20,23 +19,19 @@ router.post('/login', async (req, res) => {
     if (!email || !password)
       return res.status(400).json({ message: 'Email and password required' });
 
-    // 🔹 Find admin in MongoDB
     const admin = await AdminMongo.findOne({ email });
     if (!admin) return res.status(401).json({ message: 'Invalid credentials' });
 
-    // 🔹 Check password
     const match = await bcrypt.compare(password, admin.password_hash);
     if (!match) return res.status(401).json({ message: 'Invalid credentials' });
 
-    // 🔹 Generate JWT
     const tokenPayload = { id: admin._id, email: admin.email, db: 'MongoDB' };
     const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
 
-    // 🔹 Set cookie
     res.cookie('auth_token', token, {
       httpOnly: true,
       sameSite: 'Strict',
-      secure: true, // change to true in production
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 2 * 60 * 60 * 1000,
     });
 
@@ -51,7 +46,11 @@ router.post('/login', async (req, res) => {
  * POST /auth/logout
  */
 router.post('/logout', (req, res) => {
-  res.clearCookie('auth_token');
+  res.clearCookie('auth_token', {
+    httpOnly: true,
+    sameSite: 'Strict',
+    secure: process.env.NODE_ENV === 'production'
+  });
   res.json({ message: 'Logged out' });
 });
 
