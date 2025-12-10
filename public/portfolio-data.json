@@ -117,24 +117,23 @@
     },
     {
       "id": 2,
-      "title": "EMI WEB APP",
-      "icon": "fa-solid fa-calculator",
+      "title": "Text-to-Speech",
+      "icon": "fa-solid fa-microphone-lines",
       "tags": [
         "Web",
-        "Tool",
         "JavaScript"
       ],
-      "desc": "A simple and clean EMI calculator web app.",
-      "thumb": "./assets/projects_icon/Emi_calculator.jpg",
-      "link": "https://github.com/Dev-Suraj-Dhawal/EMI_WEB_APP",
-      "website": "https://emi-web-app-pied.vercel.app",
+      "desc": "Client-side TTS engine with real-time control of rate, pitch, volume, looping, and segmented playback.",
+      "thumb": "./assets/projects_icon/Text-to-speech.png",
+      "link": "https://github.com/Dev-Suraj-Dhawal/Text-to-Speech",
+      "website": "https://dev-suraj-dhawal.github.io/Text-to-Speech/",
       "tech": [
-        "JavaScript",
         "HTML",
-        "CSS"
+        "CSS",
+        "JavaScript"
       ]
     },
-     {
+    {
       "id": 3,
       "title": "Audio Visualizer",
       "icon": "fa-solid fa-music",
@@ -154,6 +153,25 @@
     },
     {
       "id": 4,
+      "title": "EMI WEB APP",
+      "icon": "fa-solid fa-calculator",
+      "tags": [
+        "Web",
+        "Tool",
+        "JavaScript"
+      ],
+      "desc": "A simple and clean EMI calculator web app.",
+      "thumb": "./assets/projects_icon/Emi_calculator.jpg",
+      "link": "https://github.com/Dev-Suraj-Dhawal/EMI_WEB_APP",
+      "website": "https://emi-web-app-pied.vercel.app",
+      "tech": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "id": 5,
       "title": "AI Mood Quote Generator",
       "icon": "fa-solid fa-robot",
       "tags": [
@@ -173,7 +191,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "IELTS Class Website",
       "icon": "fa-solid fa-book-open",
       "tags": [
