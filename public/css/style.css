@@ -33,7 +33,6 @@
     --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-500: oklch(55.1% 0.027 264.364);
     --color-gray-600: oklch(44.6% 0.03 256.802);
-    --color-gray-700: oklch(37.3% 0.034 259.733);
     --color-gray-800: oklch(27.8% 0.033 256.848);
     --color-gray-900: oklch(21% 0.034 264.665);
     --color-black: #000;
@@ -84,8 +83,6 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
-
-
   }
 }
 @layer base {
@@ -165,16 +162,12 @@
   }
   img, svg, video, canvas, audio, iframe, embed, object {
     display: block;
+    vertical-align: middle;
   }
   img, video {
     max-width: 100%;
     height: auto;
   }
-
-  /* .h-40 {
-    height: calc(var(--spacing) * 60);
-} */
-
   button, input, select, optgroup, textarea, ::file-selector-button {
     font: inherit;
     font-feature-settings: inherit;
@@ -516,6 +509,9 @@
   }
   .flex-shrink-0 {
     flex-shrink: 0;
+  }
+  .grow {
+    flex-grow: 1;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -1060,6 +1056,9 @@
   .text-wrap {
     text-wrap: wrap;
   }
+  .break-all {
+    word-break: break-all;
+  }
   .whitespace-nowrap {
     white-space: nowrap;
   }
@@ -1440,7 +1439,7 @@
   }
   .sm\:w-10 {
     @media (width >= 40rem) {
-      width: calc(var(--spacing) * 20); /* Note: w-10 is spacing * 20 */
+      width: calc(var(--spacing) * 10);
     }
   }
   .sm\:w-24 {
@@ -2258,15 +2257,5 @@ body {
       --tw-duration: initial;
       --tw-ease: initial;
     }
-  }
-}
-@layer utilities {
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
   }
 }

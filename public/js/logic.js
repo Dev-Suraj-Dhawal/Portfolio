@@ -271,7 +271,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                     </div>
                 `).join('');
         try {
-            new Swiper('.myCertsSwiper', { slidesPerView: 1, spaceBetween: 12, breakpoints: { 640: { slidesPerView: 2 } } });
+            new Swiper('.myCertsSwiper', { 
+                slidesPerView: 1, 
+                spaceBetween: 12, 
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false
+                },
+                breakpoints: { 640: { slidesPerView: 2 } }
+            });
         } catch (e) { console.warn('Swiper init failed', e); }
     };
 
