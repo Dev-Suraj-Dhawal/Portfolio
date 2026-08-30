@@ -261,27 +261,29 @@ document.addEventListener('DOMContentLoaded', async function () {
                 `).join('');
     };
 
-    const renderCerts = () => {
-        const certSlides = document.getElementById('certSlides');
-        if (!certSlides) return;
-        certSlides.innerHTML = DATA.certs.map(c => `
-                    <div class="swiper-slide glass p-4 rounded-lg">
-                        <div class="font-semibold text-wrap">${c.title}</div>
-                        <div class="text-sm text-slate-400 text-wrap">${c.issuer} • ${c.date}</div>
-                    </div>
-                `).join('');
-        try {
-            new Swiper('.myCertsSwiper', { 
-                slidesPerView: 1, 
-                spaceBetween: 12, 
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false
-                },
-                breakpoints: { 640: { slidesPerView: 2 } }
-            });
-        } catch (e) { console.warn('Swiper init failed', e); }
-    };
+
+    // Education and Certification 
+    // const renderCerts = () => {
+    //     const certSlides = document.getElementById('certSlides');
+    //     if (!certSlides) return;
+    //     certSlides.innerHTML = DATA.certs.map(c => `
+    //                 <div class="swiper-slide glass p-4 rounded-lg">
+    //                     <div class="font-semibold text-wrap">${c.title}</div>
+    //                     <div class="text-sm text-slate-400 text-wrap">${c.issuer} • ${c.date}</div>
+    //                 </div>
+    //             `).join('');
+    //     try {
+    //         new Swiper('.myCertsSwiper', {
+    //             slidesPerView: 1,
+    //             spaceBetween: 12,
+    //             autoplay: {
+    //                 delay: 5000,
+    //                 disableOnInteraction: false
+    //             },
+    //             breakpoints: { 640: { slidesPerView: 2 } }
+    //         });
+    //     } catch (e) { console.warn('Swiper init failed', e); }
+    // };
 
     // --- INITIALIZE APP CONTENT ---
     const initApp = () => {
@@ -659,96 +661,165 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // document.getElementById('contactForm').addEventListener('submit', async e => {
 
-        //Contact Form - Works in development and production
+        //Contact Form - Works in development and production added a form validation 
 
-        document.getElementById('contactForm').addEventListener('submit', async e => {
+        const contactForm = document.getElementById('contactForm');
 
-            e.preventDefault();
-
-            const form = e.target;
-
-            const formData = new FormData(form);
-
-            const data = Object.fromEntries(formData.entries());
+        if (contactForm) {
+            const inputs = {
+                name: document.getElementById('inputName'),
+                email: document.getElementById('inputEmail'),
+                message: document.getElementById('inputMessage')
+            };
+            const errors = {
+                name: document.getElementById('errName'),
+                email: document.getElementById('errEmail'),
+                message: document.getElementById('errMessage')
+            };
 
             const msgEl = document.getElementById('formMsg');
-
-            const submitBtn = form.querySelector('button[type="submit"]');
-
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn ? submitBtn.textContent : 'Send';
 
+            // --- HELPER FUNCTIONS FOR DYNAMIC UI ---
+            const showError = (field, msg) => {
+                errors[field].textContent = msg;
+                errors[field].classList.remove('hidden');
+                // Changes border and focus ring to red
+                inputs[field].classList.remove('border-white/10', 'focus:ring-cyan-400');
+                inputs[field].classList.add('border-red-400', 'focus:ring-red-400');
+            };
 
+            const clearError = (field) => {
+                errors[field].textContent = '';
+                errors[field].classList.add('hidden');
+                // Reverts back to standard styling
+                inputs[field].classList.remove('border-red-400', 'focus:ring-red-400');
+                inputs[field].classList.add('border-white/10', 'focus:ring-cyan-400');
+            };
 
-            if (submitBtn) {
+            // --- REAL-TIME VALIDATORS ---
+            const validateName = () => {
+                const val = inputs.name.value;
+                // Check for numbers dynamically while typing
+                if (/\d/.test(val)) {
+                    showError('name', 'Numbers not allowed. E.g., Suraj Dhawal');
+                    return false;
+                } else if (val.length > 0 && !/^[a-zA-Z\s-]+$/.test(val)) {
+                    showError('name', 'Special characters not allowed. E.g., Suraj Dhawal');
+                    return false;
+                }
+                clearError('name');
+                return true;
+            };
 
-                submitBtn.disabled = true;
+            const validateEmail = () => {
+                const val = inputs.email.value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                // Only show invalid format error if they have typed something
+                if (val.length > 0 && !emailRegex.test(val)) {
+                    showError('email', 'Please enter a valid format. E.g., hello@example.com');
+                    return false;
+                }
+                clearError('email');
+                return true;
+            };
 
-                submitBtn.textContent = 'Sending...';
+            const validateMessage = () => {
+                const val = inputs.message.value.trim();
+                if (val.length > 0 && val.length < 10) {
+                    showError('message', `Too short! Keep typing... (${val.length}/10 chars)`);
+                    return false;
+                }
+                clearError('message');
+                return true;
+            };
 
-            }
+            // --- ATTACH "MOUSE ACTIVE" / TYPING EVENTS ---
+            // 'input' fires every time a keystroke happens
+            inputs.name.addEventListener('input', validateName);
+            inputs.email.addEventListener('input', validateEmail);
+            inputs.message.addEventListener('input', validateMessage);
 
-            msgEl.textContent = 'Sending...';
+            // 'blur' fires when the user clicks away from the input
+            inputs.name.addEventListener('blur', () => {
+                if (!inputs.name.value.trim()) showError('name', 'Name is required.');
+            });
+            inputs.email.addEventListener('blur', () => {
+                if (!inputs.email.value.trim()) showError('email', 'Email is required.');
+            });
+            inputs.message.addEventListener('blur', () => {
+                if (!inputs.message.value.trim()) showError('message', 'Message is required.');
+            });
 
+            // --- FINAL SUBMIT CHECK ---
+            contactForm.addEventListener('submit', async e => {
+                e.preventDefault();
 
+                // Run all checks one last time
+                const isNameValid = validateName() && inputs.name.value.trim() !== '';
+                const isEmailValid = validateEmail() && inputs.email.value.trim() !== '';
+                const isMessageValid = validateMessage() && inputs.message.value.trim() !== '';
 
-            try {
+                // Catch empty fields on submit
+                if (!isNameValid) showError('name', 'Please provide a valid name. E.g., Suraj Dhawal');
+                if (!isEmailValid) showError('email', 'Please provide a valid email. E.g., hello@example.com');
+                if (!isMessageValid) showError('message', 'Message must be at least 10 characters.');
 
-                const response = await fetch('/save', {
-
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
-                    body: JSON.stringify(data),
-
-                });
-
-
-
-                const result = await response.json();
-
-
-
-                if (response.ok) {
-
-                    msgEl.textContent = `✅ Thanks, ${data.name}! ${result.message || 'Your message has been sent.'}`;
-
-                    msgEl.className = 'text-sm text-green-400 h-4';
-
-                    form.reset();
-
-                } else {
-
-                    throw new Error(result.message || 'Server error');
-
+                if (!isNameValid || !isEmailValid || !isMessageValid) {
+                    msgEl.textContent = 'Please fill all the required field.';
+                    msgEl.className = 'text-sm text-red-400 mt-2';
+                    return;
                 }
 
-            } catch (error) {
-
-                console.error('Form error:', error);
-
-                msgEl.textContent = '❌ Failed to send. Please try again or email directly.';
-
-                msgEl.className = 'text-sm text-red-400 h-4';
-
-            } finally {
-
+                // --- PREPARE FOR SUBMISSION ---
                 if (submitBtn) {
-
-                    submitBtn.disabled = false;
-
-                    submitBtn.textContent = originalBtnText;
-
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Sending...';
                 }
+                msgEl.textContent = 'Sending...';
+                msgEl.className = 'text-sm text-slate-300 mt-2';
 
-                setTimeout(() => { msgEl.textContent = ''; }, 5000);
+                try {
+                    const sanitizedPayload = {
+                        name: inputs.name.value.trim(),
+                        email: inputs.email.value.trim(),
+                        message: inputs.message.value.trim()
+                    };
 
-            }
+                    const response = await fetch('/save', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify(sanitizedPayload),
+                    });
 
-        });
+                    const result = await response.json();
 
+                    if (response.ok) {
+                        msgEl.textContent = `✅ Thanks, ${sanitizedPayload.name}! ${result.message || 'Your message has been sent.'}`;
+                        msgEl.className = 'text-sm text-green-400 mt-2';
+                        contactForm.reset();
+                    } else {
+                        throw new Error(result.message || 'Server error');
+                    }
+                } catch (error) {
+                    console.error('Form error:', error);
+                    msgEl.textContent = '❌ Failed to send. Please try again or email directly.';
+                    msgEl.className = 'text-sm text-red-400 mt-2';
+                } finally {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalBtnText;
+                    }
+                    setTimeout(() => {
+                        msgEl.textContent = '';
+                        msgEl.className = 'text-sm min-h-[20px]';
+                    }, 6000);
+                }
+            });
+        }
     };
-
-
 
     // --- RUN EVERYTHING ---
 
