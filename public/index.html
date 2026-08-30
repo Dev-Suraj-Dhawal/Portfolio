@@ -125,38 +125,121 @@
 
         <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-16 sm:space-y-24 container-fix">
             <!-- ABOUT -->
+      <!-- ABOUT -->
+          <!-- ABOUT -->
             <section id="about" class="scroll-mt-20">
-                <div class="md:flex md:items-start md:gap-6 lg:gap-8">
-                    <div class="md:w-1/2">
-                        <h2 class="text-2xl sm:text-3xl font-bold neon mb-4">About Me</h2>
-                        <p class="text-slate-300 leading-relaxed text-wrap mb-4">
-                            I’m a passionate Computer Engineering graduate with a strong drive to explore, build, and
-                            innovate in the tech world.
+                <!-- Kept your original working theme flex wrapper -->
+                <div class="md:flex md:items-center md:gap-6 lg:gap-10">
+                    
+                    <!-- LEFT COLUMN: Exactly 50% width (md:w-1/2) -->
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <h2 id="about-heading"
+                            class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 drop-shadow-sm">
+                            About Me
+                        </h2>
+
+                        <!-- LCP Optimized text formatting -->
+                        <p class="text-slate-300 leading-relaxed text-justify text-sm sm:text-base mb-8">
+                            I’m a passionate <span class="text-cyan-400 font-semibold">Computer Engineering
+                                graduate</span> with a strong drive to explore, build, and innovate in the tech world.
                             My journey has shaped a solid foundation in programming (C, C++, Java, Python), web
-                            development
-                            (HTML, CSS, Tailwind CSS, JavaScript), databases (MySQL, MongoDB), Linux, networking, and
-                            cybersecurity.
-                            I take pride in crafting clean, responsive, and modern user interfaces while constantly
-                            experimenting with AI and automation
-                            to create smarter and more efficient solutions.
-                            Technology for me isn’t just a career — it’s a space to create, learn, and grow every day.
+                            development (HTML, CSS, Tailwind CSS, JavaScript), databases (MySQL, MongoDB), Linux,
+                            networking, and cybersecurity. I take pride in crafting clean, responsive, and modern user
+                            interfaces while constantly experimenting with <span
+                                class="text-purple-400 font-semibold">AI and automation</span> to create smarter and
+                            more efficient solutions. Technology for me isn’t just a career — <span
+                                class="text-cyan-400 font-medium">it’s a space to create, learn, and grow every
+                                day.</span>
                         </p>
 
-                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-400">
-                            <li class="text-wrap">• Proficient in C, C++, HTML, CSS,TAILWIND-CSS, JavaScript</li>
-                            <li class="text-wrap">• Experienced with MySQL, MongoDB, Node.js & Flask</li>
-                            <li class="text-wrap">• Certified in Cybersecurity by Microsoft & LinkedIn</li>
-                            <li class="text-wrap">• Google Cloud & Generative AI Certified</li>
-                            <li class="text-wrap">• Data Science || AI || ML Certified (ISMT College)</li>
-                            <li class="text-wrap">• Cybersecurity Awareness & Threat Landscape Certified</li>
-                            <li class="text-wrap">• Strong fundamentals in Algorithms & Problem Solving</li>
-                            <li class="text-wrap">• Comfortable with Git, GitHub & Linux Environments</li>
-                            <li class="text-wrap">• Knowledge of CRM & Team Collaboration Strategies</li>
-                            <li class="text-wrap">• Strong passion for AI-driven tools & automation</li>
-                            <li class="text-wrap">• Dedicated lifelong learner with a growth mindset</li>
+                        <!-- PREMIUM SKILL BADGES WITH OFFICIAL ICONS & LIFT HOVER -->
+                    <!-- PREMIUM SKILL BADGES WITH COLOR-CODED HOVER GLOW & BULLETPROOF ICONS -->
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-300">
+
+                            <!-- Skill 1: Web Tech (Yellow Glow) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-yellow-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(250,204,21,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-yellow-400/40 shadow-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" style="width: 26px; height: 26px;" class="object-contain" loading="lazy" />
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors">Proficient in <span class="text-white font-medium">C, C++, HTML, CSS, Tailwind, JS</span></span>
+                            </li>
+
+                            <!-- Skill 2: Databases (Green Glow) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-green-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(74,222,128,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-green-400/40 shadow-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" style="width: 26px; height: 26px;" class="object-contain" loading="lazy" />
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors">Experienced with <span class="text-white font-medium">MySQL, MongoDB, Node.js</span></span>
+                            </li>
+
+                            <!-- Skill 3: Cybersecurity (Blue Glow) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-blue-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(96,165,250,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-blue-400/40 shadow-inner">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" style="width: 24px; height: 24px;" class="object-contain" loading="lazy" />
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors">Certified in <span class="text-white font-medium">Cybersecurity by Microsoft</span></span>
+                            </li>
+
+                            <!-- Skill 4: Google Cloud (Red Glow) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-red-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(248,113,113,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-red-400/40 shadow-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" style="width: 26px; height: 26px;" class="object-contain" loading="lazy" />
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors"><span class="text-white font-medium">Google Cloud & Generative AI</span> Certified</span>
+                            </li>
+
+                            <!-- Skill 5: AI / ML (Pink Glow + FontAwesome) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-pink-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(244,114,182,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-pink-400/40 shadow-inner">
+                                    <i class="fa-solid fa-brain text-pink-400 text-2xl drop-shadow-[0_0_8px_rgba(244,114,182,0.5)]"></i>
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors">Data Science || <span class="text-white font-medium">AI || ML Certified</span></span>
+                            </li>
+
+                            <!-- Skill 6: Threat Landscape (Cyan Glow + FontAwesome) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-cyan-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(6,182,212,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-cyan-400/40 shadow-inner">
+                                    <i class="fa-solid fa-shield-virus text-cyan-400 text-2xl drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]"></i>
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors"><span class="text-white font-medium">Cybersecurity Awareness</span> & Threat Landscape</span>
+                            </li>
+
+                            <!-- Skill 7: Algorithms (Orange Glow + FontAwesome) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-orange-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(251,146,60,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-orange-400/40 shadow-inner">
+                                    <i class="fa-solid fa-diagram-project text-orange-400 text-xl drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]"></i>
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors">Strong fundamentals in <span class="text-white font-medium">Algorithms & Problem Solving</span></span>
+                            </li>
+
+                            <!-- Skill 8: Git & Linux (Yellow/White Glow) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-yellow-100/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(254,240,138,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-yellow-100/40 shadow-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" style="width: 26px; height: 26px;" class="object-contain" loading="lazy" />
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors">Comfortable with <span class="text-white font-medium">Git, GitHub & Linux</span> Environments</span>
+                            </li>
+
+                            <!-- Skill 9: CRM (Indigo Glow + FontAwesome) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-indigo-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(129,140,248,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-indigo-400/40 shadow-inner">
+                                    <i class="fa-solid fa-users-gear text-indigo-400 text-xl drop-shadow-[0_0_8px_rgba(129,140,248,0.5)]"></i>
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors">Knowledge of <span class="text-white font-medium">CRM & Team Collaboration</span></span>
+                            </li>
+
+                            <!-- Skill 10: Automation (Purple Glow + FontAwesome) -->
+                            <li class="glass p-3.5 rounded-xl border border-white/5 hover:border-purple-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(167,139,250,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-purple-400/40 shadow-inner">
+                                    <i class="fa-solid fa-robot text-purple-400 text-xl drop-shadow-[0_0_8px_rgba(167,139,250,0.5)]"></i>
+                                </div>
+                                <span class="leading-snug group-hover:text-white transition-colors">Passion for <span class="text-white font-medium">AI-driven tools & automation</span></span>
+                            </li>
                         </ul>
                     </div>
-                    <div class="profile-section">
+
+                    <!-- RIGHT COLUMN: Exactly 50% width (md:w-1/2) for perfect row alignment -->
+                    <div class="w-full md:w-1/2 flex justify-center items-center order-first md:order-last mb-10 md:mb-0 relative">
                         <div class="premium-profile-card">
 
                             <!-- Ambient and Orbit Rings -->
@@ -167,7 +250,6 @@
                             <!-- Image Container -->
                             <div class="profile-frame">
                                 <div class="profile-mask">
-                                    <!-- Replace src with your image: src="/profile" -->
                                     <img src="/profile" alt="Suraj Dhawal Profile" class="profile-img" />
                                     <div class="profile-inner-shadow"></div>
                                     <div class="profile-shine"></div>
@@ -222,29 +304,29 @@
 
             <!-- EDUCATION & CERTS -->
 
-<section id="education" class="scroll-mt-20 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-    
-    <!-- Education Card -->
-    <div class="glass p-4 sm:p-6 rounded-lg flex flex-col h-full">
-        <h4 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-graduation-cap text-cyan-400"></i> Education
-        </h4>
-        <div id="educationList" class="text-slate-300 flex-grow flex flex-col justify-center"></div>
-    </div>
+            <section id="education" class="scroll-mt-20 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
 
-    <!-- Certifications Card -->
-    <div class="glass p-4 sm:p-6 rounded-lg flex flex-col h-full overflow-hidden">
-        <h4 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-award text-purple-400"></i> Certifications
-        </h4>
-        <!-- Swiper Container -->
-        <div class="mt-2 flex-grow relative w-full overflow-hidden">
-            <div class="swiper myCertsSwiper h-full">
-                <div class="swiper-wrapper items-stretch" id="certSlides"></div>
-            </div>
-        </div>
-    </div>
-</section>
+                <!-- Education Card -->
+                <div class="glass p-4 sm:p-6 rounded-lg flex flex-col h-full">
+                    <h4 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap text-cyan-400"></i> Education
+                    </h4>
+                    <div id="educationList" class="text-slate-300 flex-grow flex flex-col justify-center"></div>
+                </div>
+
+                <!-- Certifications Card -->
+                <div class="glass p-4 sm:p-6 rounded-lg flex flex-col h-full overflow-hidden">
+                    <h4 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-award text-purple-400"></i> Certifications
+                    </h4>
+                    <!-- Swiper Container -->
+                    <div class="mt-2 flex-grow relative w-full overflow-hidden">
+                        <div class="swiper myCertsSwiper h-full">
+                            <div class="swiper-wrapper items-stretch" id="certSlides"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <!-- CONTACT -->
             <section id="contact" class="scroll-mt-20">

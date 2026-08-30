@@ -1,1 +1,194 @@
 *{font-family:Inter,sans-serif;box-sizing:border-box}body,html{overflow-x:hidden;margin:0;padding:0;color:#f1f1f1;background-color:#0f172a}.glass{background:rgba(17,24,39,.7);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:.75rem}.glass-hover{transition:all .3s ease}.glass-hover:hover{background:rgba(17,24,39,.85);border-color:rgba(255,255,255,.15);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.3)}.nav-item{transition:all .2s ease;position:relative;overflow:hidden;border-radius:.5rem;padding:.5rem .75rem}.nav-item::before{content:'';position:absolute;left:0;top:0;height:100%;width:3px;background:linear-gradient(to bottom,#6366f1,#ec4899);transform:scaleY(0);transition:transform .2s ease}.nav-item.active,.nav-item:hover{background:rgba(99,102,241,.1);padding-left:1rem}.nav-item.active::before,.nav-item:hover::before{transform:scaleY(1)}.stat-card{background:linear-gradient(135deg,rgba(99,102,241,.1) 0,rgba(236,72,153,.1) 100%);border:1px solid rgba(255,255,255,.1);border-radius:.75rem;transition:all .3s ease}.stat-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(99,102,241,.2)}.btn-gradient{background:linear-gradient(135deg,#6366f1 0,#ec4899 100%);color:#fff;border:none;border-radius:.5rem;padding:.6rem 1.2rem;font-weight:500;transition:all .3s ease;cursor:pointer}.btn-gradient:hover{transform:scale(1.05);box-shadow:0 8px 25px rgba(99,102,241,.4)}#contactsSection table{width:100%;border-collapse:collapse;table-layout:auto}#contactsSection table{width:100%;border-collapse:collapse;table-layout:auto}#contactsSection td,#contactsSection th{padding:.9rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);overflow-wrap:break-word;word-break:break-word}#contactsSection td{font-size:.9rem;color:#e5e7eb;transition:color .2s ease}.table-row:hover td{color:#fff;background:rgba(99,102,241,.05)}#contactsSection td.message-cell{max-width:280px;position:relative}#contactsSection td.message-cell::after{content:'';position:absolute;right:0;top:0;height:100%;width:30px;background:linear-gradient(to left,rgba(17,24,39,.9),transparent)}#contactsSection td.message-cell:hover{white-space:normal;overflow:visible;text-overflow:clip;background:rgba(99,102,241,.05);border-radius:.25rem;padding:.9rem;box-shadow:0 4px 12px rgba(99,102,241,.15)}input[type=search]:focus,input[type=text]:focus{outline:0;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.1)}.profile-ring{position:relative;display:inline-block;border-radius:50%}.profile-ring::before{content:'';position:absolute;inset:-3px;border-radius:inherit;padding:3px;background:linear-gradient(135deg,#6366f1,#ec4899);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}@keyframes shimmer{0%{background-position:-1000px 0}100%{background-position:1000px 0}}.shimmer{animation:shimmer 2s infinite;background:linear-gradient(to right,transparent 0,rgba(255,255,255,.1) 50%,transparent 100%);background-size:1000px 100%}@media (max-width:480px){h1,h2,h3{font-size:1.05rem}.btn-gradient{font-size:.85rem;width:100%}.stat-card{padding:1rem}}#contactsSection{transition:all .4s ease-in-out}#contactsSection:hover{transform:translateY(-2px)}@media (max-width:768px){#contactsSection table thead{display:none}#contactsSection tr:hover{transform:scale(1.01)}#contactsSection td{padding:.75rem .5rem;text-align:right;position:relative;border:none}#contactsSection td::before{content:attr(data-label);position:absolute;left:1rem;text-align:left;font-weight:600;color:#9ca3af}}#contactsSection ::-webkit-scrollbar{height:6px}#contactsSection ::-webkit-scrollbar-thumb{background:linear-gradient(to right,#6366f1,#ec4899);border-radius:9999px}@media (max-width:768px){#contactsSection table thead{display:none}#contactsSection table,#contactsSection tbody,#contactsSection td,#contactsSection tr{display:block;width:100%}#contactsSection tr{margin-bottom:1rem;background:rgba(255,255,255,.03);border-radius:.5rem;padding:.75rem;overflow-wrap:break-word}#contactsSection td{text-align:right;padding:.5rem 1rem;position:relative;white-space:normal}#contactsSection td::before{content:attr(data-label);position:absolute;left:1rem;text-align:left;font-weight:600;color:#9ca3af}#contactsSection td.message-cell{max-width:100%}}
+
+        /* =========================================
+           PREMIUM PROFILE CARD STYLES
+           ========================================= */
+
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* Main Container */
+        .premium-profile-card {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+        }
+
+        /* 1. Ambient Background Glow */
+        .profile-glow {
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(6,182,212,0.3) 0%, rgba(167,139,250,0.1) 60%, transparent 100%);
+            filter: blur(20px);
+            border-radius: 50%;
+            animation: profile-pulse-glow 4s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        /* 2. Spinning Orbit Rings */
+        .profile-orbit-dashed {
+            position: absolute;
+            inset: -15px;
+            border: 2px dashed rgba(167, 139, 250, 0.4); /* Purple tint */
+            border-radius: 50%;
+            animation: profile-spin-slow 15s linear infinite;
+            z-index: 1;
+        }
+
+        .profile-orbit-solid {
+            position: absolute;
+            inset: -5px;
+            border: 2px solid rgba(6, 182, 212, 0.2); /* Cyan tint */
+            border-left-color: rgba(6, 182, 212, 0.9); /* Bright Cyan Highlight */
+            border-radius: 50%;
+            animation: profile-spin-reverse 10s linear infinite;
+            z-index: 1;
+        }
+
+        /* 3. The Image Frame & Gradient Border */
+        .profile-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            padding: 5px; /* Creates the gradient border thickness */
+            background: linear-gradient(135deg, #06b6d4, #a78bfa); /* Cyan to Purple */
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            /* Important for gradient padding trick */
+            box-sizing: border-box; 
+        }
+
+        .profile-mask {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #0f172a;
+        }
+
+        /* 4. The Profile Image */
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.02);
+            transition: transform 0.5s ease;
+        }
+
+        .premium-profile-card:hover .profile-img {
+            transform: scale(1.08); /* Smooth zoom on hover */
+        }
+
+        /* 5. Inner Shadow (Depth) and Glass Shine */
+        .profile-inner-shadow {
+            position: absolute;
+            inset: 0;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+            border-radius: 50%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .profile-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-20deg);
+            animation: profile-shine-sweep 7s infinite;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        /* 6. Floating "Available" Badge */
+        .profile-badge {
+            position: absolute;
+            bottom: 15px;
+            right: 5px;
+            background: rgba(15, 23, 42, 0.85); /* Dark Glass */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .profile-badge:hover {
+            transform: translateY(-3px);
+            border-color: rgba(6, 182, 212, 0.5); /* Cyan border on hover */
+        }
+
+        /* Pulsing Green Dot */
+        .badge-dot-wrapper {
+            position: relative;
+            width: 10px;
+            height: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .badge-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e; /* Success Green */
+            border-radius: 50%;
+        }
+
+        .badge-ping {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #22c55e;
+            border-radius: 50%;
+            animation: profile-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .badge-text {
+            color: #f8fafc;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* =========================================
+           CUSTOM KEYFRAMES FOR PROFILE EFFECTS
+           ========================================= */
+        @keyframes profile-spin-slow {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes profile-spin-reverse {
+            100% { transform: rotate(-360deg); }
+        }
+
+        @keyframes profile-pulse-glow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        @keyframes profile-shine-sweep {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        @keyframes profile-ping {
+            75%, 100% { transform: scale(2.5); opacity: 0; }
+        }
