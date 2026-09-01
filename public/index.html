@@ -1,53 +1,197 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title b>Suraj Dhawal — Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- <button id="openAdmin"
-        class="px-4 py-2 rounded-md bg-gradient-to-r from-cyan-400 to-purple-500 text-black font-semibold hover:opacity-90 transition">
-    </button> -->
+    <!-- =========================================
+         1. PRIMARY SEO (Google & Bing Dominance)
+         ========================================= -->
+    <title>Suraj Dhawal | Software Developer in Nepal | Full-Stack & AI</title>
+    <meta name="title" content="Suraj Dhawal | Software Developer in Nepal | Full-Stack & AI" />
+    <meta name="description"
+        content="Official portfolio of Suraj Dhawal, a Computer Engineering graduate from Nepal. Full-Stack Developer specializing in React, Node.js, AI, and Cybersecurity. Creator of LogicBench and Aether." />
+    <meta name="keywords"
+        content="Suraj Dhawal, Software Developer Nepal, Full-Stack Developer Butwal, Frontend Developer, React, Next.js, Node.js, Cybersecurity, LogicBench, Aether, AI Developer Nepal" />
+    <meta name="author" content="Suraj Dhawal" />
+    <link rel="canonical" href="https://surajdhawal.com.np/" />
 
-    <link rel="shortcut icon" href="./assets/icons/logo/logo2-removebg-preview.png">
-    <link rel="icon" type="image/png" href="./assets/icons/logo/logo2-removebg-preview.png>
+    <!-- =========================================
+         2. OPEN GRAPH (LinkedIn, Facebook, Discord)
+         ========================================= -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://surajdhawal.com.np/" />
+    <meta property="og:title" content="Suraj Dhawal | Software Developer & Tech Innovator" />
+    <meta property="og:description"
+        content="Explore my full-stack projects, digital logic simulators, and cloud architecture solutions." />
+    <meta property="og:image" content="https://surajdhawal.com.np/assets/pp.jpg" />
 
-    <meta name=" description"
-        content="Suraj Dhawal — Diploma in Computer Engineering. Frontend Web Developer | Aspiring Software Developer | AI & Cybersecurity enthusiast." />
+    <!-- =========================================
+         3. TWITTER CARDS (X)
+         ========================================= -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://surajdhawal.com.np/" />
+    <meta property="twitter:title" content="Suraj Dhawal | Software Developer" />
+    <meta property="twitter:description"
+        content="Computer Engineering graduate building high-performance web applications and AI tools in Nepal." />
+    <meta property="twitter:image" content="https://surajdhawal.com.np/assets/pp.jpg" />
 
-    <!-- Tailwind -->
+    <!-- =========================================
+         4. GENERATIVE ENGINE OPTIMIZATION (GEO) & KNOWLEDGE PANEL
+         ========================================= -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Suraj Dhawal",
+      "url": "https://surajdhawal.com.np/",
+      "jobTitle": "Software Developer",
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Computer Engineering"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Butwal, Rupandehi",
+        "addressCountry": "Nepal"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/suraj-dhawal-25055a2a5/",
+        "https://github.com/Dev-Suraj-Dhawal/"
+      ],
+      "knowsAbout": [
+        "Web Development", 
+        "React", 
+        "Node.js", 
+        "Artificial Intelligence", 
+        "Cybersecurity", 
+        "LogicBench Simulator", 
+        "Aether OS"
+      ]
+    }
+    </script>
+
+    <!-- =========================================
+         5. ASSETS, ICONS & STYLES
+         ========================================= -->
+    <!-- Fixed Unclosed Quotes on Favicon -->
+    <!-- FIXED: -->
+<link rel="shortcut icon" href="/assets/icons/logo/logo2-removebg-preview.png">
+<link rel="icon" type="image/png" href="/assets/icons/logo/logo2-removebg-preview.png">
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/production.min.css">
-    <!-- <link rel="stylesheet" href="css/production.css"> -->
-    <!-- <link rel="stylesheet" href="css/input.css"> -->
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
-   <link rel="stylesheet" href="/css/style.css?v=2.0">
+    <link rel="stylesheet" href="/css/style.css?v=2.0">
+    
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
+    <!-- Preconnect for Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-    <!-- GSAP + ScrollTrigger -->
+    <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <!-- Swiper -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
-
-    <!-- Socket.IO -->
+    
     <script src="/socket.io/socket.io.js"></script>
-
-
 </head>
 
-<body class="text-slate-100" class="lazy-bg">
+<body class="text-slate-100 lazy-bg overflow-hidden">
+<!-- =========================================
+         THE CYBER-SECURITY PRELOADER UI
+         ========================================= -->
+<!-- THE CYBER-SECURITY PRELOADER UI -->
+<!-- THE CYBER-SECURITY PRELOADER UI -->
+<!-- THE CYBER-SECURITY PRELOADER UI -->
+<!-- <div id="cyber-preloader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #050505; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.7s ease;">        <canvas id="matrix-canvas" class="absolute inset-0 opacity-40 z-0"></canvas> -->
+       <!-- THE ADVANCED CYBER-SECURITY HUD -->
+<!-- THE ADVANCED CYBER-SECURITY HUD -->
+<div id="cyber-preloader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-color: #030712; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: all 0.7s ease;" class="text-cyan-400 font-mono">
+    
+    <!-- Multi-Layered Backgrounds -->
+    <canvas id="matrix-canvas" class="absolute inset-0 opacity-30 z-0"></canvas>
+    <div class="absolute inset-0 hex-grid opacity-30 z-0 pointer-events-none animate-pulse"></div>
+    <div class="scanlines"></div>
+
+    <!-- Master HUD Layout -->
+    <div class="relative z-10 w-full px-4 sm:px-8 flex flex-col gap-8 items-center justify-center h-full pt-10" style="max-width: 80rem;">
+        
+        <!-- Top Row: Diagnostics, Core, Network -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center w-full">
+            
+            <!-- LEFT PANEL: Live System Diagnostics -->
+            <div class="hidden md:flex flex-col gap-4 w-full bg-black/50 border border-cyan-500/30 p-5 rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.15)] backdrop-blur-md">
+                <h3 class="text-[0.65rem] font-black tracking-[0.3em] text-cyan-300 border-b border-cyan-500/30 pb-2 mb-2">SYS_DIAGNOSTICS</h3>
+                <div class="flex flex-col gap-3 text-xs tracking-wider text-slate-400 font-medium">
+                    <div class="flex justify-between"><span>NODE_V8_ENGINE:</span><span class="text-cyan-400 animate-pulse">OPTIMAL</span></div>
+                    <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                        <div id="node-bar" class="h-full bg-cyan-400 transition-all duration-300 ease-out" style="width: 88%"></div>
+                    </div>
+                    <div class="flex justify-between mt-2"><span>MEM_ALLOCATION:</span><span id="mem-text" class="text-purple-400">16.4TB / 32TB</span></div>
+                    <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                        <div id="mem-bar" class="h-full bg-purple-400 transition-all duration-300 ease-out" style="width: 52%"></div>
+                    </div>
+                    <div class="flex justify-between mt-2"><span>MONGO_ATLAS:</span><span class="text-green-400">SYNCING</span></div>
+                    <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                        <div id="mongo-bar" class="h-full bg-green-400 transition-all duration-300 ease-out" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CENTER PANEL: The Encryption Core -->
+            <div class="flex flex-col items-center justify-center w-full scale-110">
+                <div class="relative w-56 h-56 flex items-center justify-center mb-6">
+                    <div class="cyber-ring-1"></div>
+                    <div class="cyber-ring-2"></div>
+                    <div class="cyber-ring-3"></div>
+                    <div class="absolute inset-12 border border-white/20 rounded-full bg-black/40 backdrop-blur-sm shadow-[inset_0_0_20px_rgba(6,182,212,0.2)]"></div>
+                    
+                    <div class="flex flex-col items-center justify-center bg-transparent rounded-full w-36 h-36 z-10">
+                        <div id="scramble-text" class="text-4xl font-black text-cyan-400 text-glow tracking-widest glitch-text" data-text="&X#%">
+                            &X#%
+                        </div>
+                        <div class="text-[0.6rem] text-purple-400 tracking-[0.4em] font-bold uppercase mt-3 animate-pulse">Decrypting</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: Target Profile & GEO-SEO -->
+            <div class="hidden md:flex flex-col gap-4 w-full bg-black/50 border border-purple-500/30 p-5 rounded-xl shadow-[0_0_20px_rgba(168,85,247,0.15)] backdrop-blur-md">
+                <h3 class="text-[0.65rem] font-black tracking-[0.3em] text-purple-300 border-b border-purple-500/30 pb-2 mb-2">TARGET_PROFILE // GEO_SEO</h3>
+                 <div class="flex flex-col gap-3 text-[0.65rem] tracking-wider text-slate-400 font-mono">
+                    <div class="flex justify-between"><span>TARGET:</span><span class="text-cyan-400 font-bold text-xs">SURAJ DHAWAL</span></div>
+                    <div class="flex justify-between"><span>ROLE:</span><span class="text-purple-400">FULL-STACK DEV</span></div>
+                    <div class="flex justify-between"><span>CORE_STACK:</span><span class="text-yellow-400">REACT / NEXT.JS / NODE.JS</span></div>
+                    <div class="flex justify-between"><span>HARDWARE:</span><span class="text-green-400">IOT & EMBEDDED SYS</span></div>
+                    
+                    <div class="mt-2 border border-dashed border-cyan-500/50 bg-cyan-500/10 p-2 text-center rounded">
+                        <span class="text-cyan-400 font-bold tracking-widest animate-pulse">INDEXING: LOGICBENCH & AETHER</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM ROW: The Command Terminal -->
+        <div class="bg-black/80 rounded-xl cyber-terminal relative overflow-hidden flex flex-col h-56 sm:h-64 mt-4 backdrop-blur-md" style="width: 100%; max-width: 56rem; border: 1px solid rgba(6,182,212,0.4);">
+            <div class="flex items-center justify-between px-5 py-3 border-b border-cyan-500/40 bg-cyan-950/40">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-red-500 animate-[pulse_0.5s_ease-in-out_infinite]"></div>
+                    <span class="text-xs text-cyan-300 tracking-[0.2em] font-black">ROOT_ACCESS // TERMINAL</span>
+                </div>
+                <span class="text-[0.65rem] text-slate-400 tracking-[0.2em] font-bold">ENCRYPTION: AES-256</span>
+            </div>
+            
+            <div id="terminal-output" class="p-5 flex-grow overflow-y-auto text-xs sm:text-sm flex flex-col gap-2 font-mono text-left w-full leading-relaxed"></div>
+            
+            <div class="w-full h-1.5 bg-black border-t border-cyan-500/40 relative overflow-hidden">
+                <div id="cyber-progress" class="absolute top-0 left-0 h-full bg-gradient-to-r from-cyan-600 to-cyan-300 w-0 transition-all duration-100" style="box-shadow: 0 0 15px #06b6d4;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div id="app" class="overflow-x-hidden">
         <!-- NAV -->
         <nav class="fixed w-full z-50 top-0 left-0 px-4 py-3 glass">
@@ -124,12 +268,12 @@
         </header>
 
         <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-16 sm:space-y-24 container-fix">
-   
-          <!-- ABOUT -->
+
+            <!-- ABOUT -->
             <section id="about" class="scroll-mt-20">
                 <!-- Kept your original working theme flex wrapper -->
                 <div class="md:flex md:items-center md:gap-6 lg:gap-10">
-                    
+
                     <!-- LEFT COLUMN: Exactly 50% width (md:w-1/2) -->
                     <div class="w-full md:w-1/2 space-y-6">
                         <h2 id="about-heading"
@@ -151,93 +295,140 @@
                                 day.</span>
                         </p>
 
-               
-                    <!-- PREMIUM SKILL BADGES WITH COLOR-CODED HOVER GLOW & BULLETPROOF ICONS -->
+
+                        <!-- PREMIUM SKILL BADGES WITH COLOR-CODED HOVER GLOW & BULLETPROOF ICONS -->
                         <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm  text-slate-300 mb-10">
 
                             <!-- Skill 1: Web Tech (Yellow Glow) -->
-                            <li class="glass p-3.5 rounded-xl cursor-pointer border border-white/5 hover:border-yellow-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(250,204,21,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-yellow-400/40 shadow-inner">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" style="width: 26px; height: 26px;" class="object-contain" loading="lazy" />
+                            <li
+                                class="glass p-3.5 rounded-xl cursor-pointer border border-white/5 hover:border-yellow-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(250,204,21,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-yellow-400/40 shadow-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                        alt="JS" style="width: 26px; height: 26px;" class="object-contain"
+                                        loading="lazy" />
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors">Proficient in <span class="text-white font-medium">C, C++, HTML, CSS, Tailwind, JS</span></span>
+                                <span class="leading-snug group-hover:text-white transition-colors">Proficient in <span
+                                        class="text-white font-medium">C, C++, HTML, CSS, Tailwind, JS</span></span>
                             </li>
 
                             <!-- Skill 2: Databases (Green Glow) -->
-                            <li class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-green-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(74,222,128,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-green-400/40 shadow-inner">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" style="width: 26px; height: 26px;" class="object-contain" loading="lazy" />
+                            <li
+                                class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-green-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(74,222,128,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-green-400/40 shadow-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                                        alt="MongoDB" style="width: 26px; height: 26px;" class="object-contain"
+                                        loading="lazy" />
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors">Experienced with <span class="text-white font-medium">MySQL, MongoDB, Node.js</span></span>
+                                <span class="leading-snug group-hover:text-white transition-colors">Experienced with
+                                    <span class="text-white font-medium">MySQL, MongoDB, Node.js</span></span>
                             </li>
 
                             <!-- Skill 3: Cybersecurity (Blue Glow) -->
-                            <li class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-blue-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(96,165,250,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-blue-400/40 shadow-inner">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" style="width: 24px; height: 24px;" class="object-contain" loading="lazy" />
+                            <li
+                                class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-blue-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(96,165,250,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-blue-400/40 shadow-inner">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg"
+                                        alt="Microsoft" style="width: 24px; height: 24px;" class="object-contain"
+                                        loading="lazy" />
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors">Certified in <span class="text-white font-medium">Cybersecurity by Microsoft</span></span>
+                                <span class="leading-snug group-hover:text-white transition-colors">Certified in <span
+                                        class="text-white font-medium">Cybersecurity by Microsoft</span></span>
                             </li>
 
                             <!-- Skill 4: Google Cloud (Red Glow) -->
-                            <li class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-red-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(248,113,113,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-red-400/40 shadow-inner">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" style="width: 26px; height: 26px;" class="object-contain" loading="lazy" />
+                            <li
+                                class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-red-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(248,113,113,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-red-400/40 shadow-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg"
+                                        alt="Google Cloud" style="width: 26px; height: 26px;" class="object-contain"
+                                        loading="lazy" />
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors"><span class="text-white font-medium">Google Cloud & Generative AI</span> Certified</span>
+                                <span class="leading-snug group-hover:text-white transition-colors"><span
+                                        class="text-white font-medium">Google Cloud & Generative AI</span>
+                                    Certified</span>
                             </li>
 
                             <!-- Skill 5: AI / ML (Pink Glow + FontAwesome) -->
-                            <li class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-pink-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(244,114,182,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-pink-400/40 shadow-inner">
-                                    <i class="fa-solid fa-brain text-pink-400 text-2xl drop-shadow-[0_0_8px_rgba(244,114,182,0.5)]"></i>
+                            <li
+                                class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-pink-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(244,114,182,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-pink-400/40 shadow-inner">
+                                    <i
+                                        class="fa-solid fa-brain text-pink-400 text-2xl drop-shadow-[0_0_8px_rgba(244,114,182,0.5)]"></i>
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors">Data Science || <span class="text-white font-medium">AI || ML Certified</span></span>
+                                <span class="leading-snug group-hover:text-white transition-colors">Data Science ||
+                                    <span class="text-white font-medium">AI || ML Certified</span></span>
                             </li>
 
                             <!-- Skill 6: Threat Landscape (Cyan Glow + FontAwesome) -->
-                            <li class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-cyan-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(6,182,212,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-cyan-400/40 shadow-inner">
-                                    <i class="fa-solid fa-shield-virus text-cyan-400 text-2xl drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]"></i>
+                            <li
+                                class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-cyan-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(6,182,212,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-cyan-400/40 shadow-inner">
+                                    <i
+                                        class="fa-solid fa-shield-virus text-cyan-400 text-2xl drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]"></i>
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors"><span class="text-white font-medium">Cybersecurity Awareness</span> & Threat Landscape</span>
+                                <span class="leading-snug group-hover:text-white transition-colors"><span
+                                        class="text-white font-medium">Cybersecurity Awareness</span> & Threat
+                                    Landscape</span>
                             </li>
 
                             <!-- Skill 7: Algorithms (Orange Glow + FontAwesome) -->
-                            <li class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-orange-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(251,146,60,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-orange-400/40 shadow-inner">
-                                    <i class="fa-solid fa-diagram-project text-orange-400 text-xl drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]"></i>
+                            <li
+                                class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-orange-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(251,146,60,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-orange-400/40 shadow-inner">
+                                    <i
+                                        class="fa-solid fa-diagram-project text-orange-400 text-xl drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]"></i>
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors">Strong fundamentals in <span class="text-white font-medium">Algorithms & Problem Solving</span></span>
+                                <span class="leading-snug group-hover:text-white transition-colors">Strong fundamentals
+                                    in <span class="text-white font-medium">Algorithms & Problem Solving</span></span>
                             </li>
 
                             <!-- Skill 8: Git & Linux (Yellow/White Glow) -->
-                            <li class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-yellow-100/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(254,240,138,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-yellow-100/40 shadow-inner">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" style="width: 26px; height: 26px;" class="object-contain" loading="lazy" />
+                            <li
+                                class="glass p-3.5 rounded-xl border cursor-pointer border-white/5 hover:border-yellow-100/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(254,240,138,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-yellow-100/40 shadow-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+                                        alt="Linux" style="width: 26px; height: 26px;" class="object-contain"
+                                        loading="lazy" />
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors">Comfortable with <span class="text-white font-medium">Git, GitHub & Linux</span> Environments</span>
+                                <span class="leading-snug group-hover:text-white transition-colors">Comfortable with
+                                    <span class="text-white font-medium">Git, GitHub & Linux</span> Environments</span>
                             </li>
 
                             <!-- Skill 9: CRM (Indigo Glow + FontAwesome) -->
-                            <li class="glass p-3.5 mb-10 rounded-xl border cursor-pointer border-white/5 hover:border-indigo-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(129,140,248,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-indigo-400/40 shadow-inner">
-                                    <i class="fa-solid fa-users-gear text-indigo-400 text-xl drop-shadow-[0_0_8px_rgba(129,140,248,0.5)]"></i>
+                            <li
+                                class="glass p-3.5 mb-10 rounded-xl border cursor-pointer border-white/5 hover:border-indigo-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(129,140,248,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-indigo-400/40 shadow-inner">
+                                    <i
+                                        class="fa-solid fa-users-gear text-indigo-400 text-xl drop-shadow-[0_0_8px_rgba(129,140,248,0.5)]"></i>
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors">Knowledge of <span class="text-white font-medium">CRM & Team Collaboration</span></span>
+                                <span class="leading-snug group-hover:text-white transition-colors">Knowledge of <span
+                                        class="text-white font-medium">CRM & Team Collaboration</span></span>
                             </li>
 
                             <!-- Skill 10: Automation (Purple Glow + FontAwesome) -->
-                            <li class="glass p-3.5 mb-10 rounded-xl border cursor-pointer border-white/5 hover:border-purple-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(167,139,250,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
-                                <div class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-purple-400/40 shadow-inner">
-                                    <i class="fa-solid fa-robot text-purple-400 text-xl drop-shadow-[0_0_8px_rgba(167,139,250,0.5)]"></i>
+                            <li
+                                class="glass p-3.5 mb-10 rounded-xl border cursor-pointer border-white/5 hover:border-purple-400/50 hover:bg-white/5 hover:-translate-y-1 hover:shadow-[0_8px_20px_-6px_rgba(167,139,250,0.3)] transition-all duration-300 flex items-center gap-4 group cursor-default">
+                                <div
+                                    class="w-12 h-12 flex-shrink-0 bg-slate-900 rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 border border-white/10 group-hover:border-purple-400/40 shadow-inner">
+                                    <i
+                                        class="fa-solid fa-robot text-purple-400 text-xl drop-shadow-[0_0_8px_rgba(167,139,250,0.5)]"></i>
                                 </div>
-                                <span class="leading-snug group-hover:text-white transition-colors">Passion for <span class="text-white font-medium">AI-driven tools & automation</span></span>
+                                <span class="leading-snug group-hover:text-white transition-colors">Passion for <span
+                                        class="text-white font-medium">AI-driven tools & automation</span></span>
                             </li>
                         </ul>
                     </div>
 
-                   <!-- RIGHT COLUMN: Exactly 50% width (md:w-1/2) for perfect row alignment -->
+                    <!-- RIGHT COLUMN: Exactly 50% width (md:w-1/2) for perfect row alignment -->
                     <!-- FIXED: Added 'mt-16 md:mt-0' to clear the orbit rings on mobile! -->
                     <div class="w-full md:w-1/2 flex justify-center items-center mt-16 md:mt-0 mb-10 md:mb-0 relative">
                         <div class="premium-profile-card">
@@ -267,7 +458,7 @@
 
                         </div>
                     </div>
-                
+
                 </div>
             </section>
 
@@ -491,18 +682,19 @@
     </div>  -->
 
     <!-- APP SCRIPT -->
-
-    <!-- <script src="js/admin.js"></script> -->
-    <script src="js/logic.js"></script>
-    <script src="js/login-modal.js"></script>
-    <script src="js/edu.js"></script>
+<!-- APP SCRIPT -->
+    <script src="/js/preloader.js"></script>
+    <script src="/js/logic.js"></script>
+    <script src="/js/login-modal.js"></script>
+    <script src="/js/edu.js"></script>
 
     <!-- Vercel Web Analytics -->
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-
+</body>
+</html>
 </body>
 
 </html>

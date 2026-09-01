@@ -92,3 +92,7 @@ jspm_packages/
 ehthumbs.db
 Thumbs.db
 new.html
+# preloader.html
+# preloader.js
+pp.png
+

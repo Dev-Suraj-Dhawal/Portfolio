@@ -636,7 +636,7 @@ app.get("/contacts", async (req, res) => {
   }
 });
 
-// ============================================
+/// ============================================
 // Fetch Profile Image
 // Auto-load from local assets if DB empty
 // Returns binary image
@@ -646,8 +646,16 @@ app.get("/profile", async (req, res) => {
     let profile = await Profile.findOne().sort({ created_at: -1 });
 
     if (!profile) {
-      const imgPath = path.join(__dirname, "public", "assets", "b2.png");
-      if (!fs.existsSync(imgPath)) {
+      // Smart Fallback: Check multiple possible locations for your image
+      const possiblePaths = [
+        path.join(__dirname, "public", "assets", "b2.png"),
+        path.join(__dirname, "public", "assets", "pp.png"),
+        path.join(__dirname, "pp.png") // Added root pp.png based on your explorer
+      ];
+      
+      let imgPath = possiblePaths.find(p => fs.existsSync(p));
+
+      if (!imgPath) {
         return res.status(404).json({ message: "Local profile image not found" });
       }
 
@@ -676,7 +684,6 @@ app.get("/profile", async (req, res) => {
     res.status(500).json({ message: "Failed to fetch profile" });
   }
 });
-
 // ============================================
 // ✅ Get Profile Metadata (Secure, Admin-only)
 // ============================================
